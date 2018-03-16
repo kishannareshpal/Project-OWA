@@ -55,7 +55,7 @@ var slectClasse = document.getElementById("classee"),
 slectClasse.onchange = function() {
     slectDisc.length = 1;
     $("#ktable").html("");
-    console.log(this.selectedOptions[0].value);
+    // console.log(this.selectedOptions[0].value);
     if (this.selectedIndex < 1) return;
     for (var disciplina in classeObject['classes'][this.selectedOptions[0].value]) {
         slectDisc.options[slectDisc.options.length] = new Option(disciplina, classeObject['classes'][this.selectedOptions[0].value][disciplina])

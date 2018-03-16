@@ -28,12 +28,13 @@
   $red_sql = mysqli_query($conn, $sql);
 
   if (!$red_sql) {
-    # code...
     echo "error";
 
   } else {
-    # code...
     echo "done";
   }
+
+  $red_sql->close();
+  $conn->close();
 
 ?>

@@ -201,4 +201,6 @@ if (isset($_POST['addstudent'])) {
   }
 
 }
+
+$conn->close();
  ?>

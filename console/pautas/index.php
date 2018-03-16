@@ -1,14 +1,10 @@
 <?php
-  // If entered illegally
-  // if(!isset($_POST['submit'])){
-  //   header("location: ../"); // Redirect To Profile Page
-  // }
 
   # code...
-  include('../../parents/session.php'); // Includes session Script
+  include('../../alunos/session.php'); // Includes session Script
 
-  if ($_SESSION['login_user'] !== "oneworldacademy") {
-    @header("location: ../"); // Redirect To Profile Page
+  if ($_COOKIE['lu'] !== "owa") {
+    @header("location: ../../"); // Redirect To Profile Page
     print_r("Error 405");
     die();
   }
@@ -21,9 +17,25 @@
   <head>
     <!-- TODO: Add essential meta tags later -->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Console - OWA</title>
+    <meta author="www.oneworldacademymz.com">
+    <meta co-author="Kishan Nareshpal Jadav">
+    <title>Pautas - OWA Console</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="One World Academy">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="../../images/android-desktop.png">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- Depprecated -->
+    <!-- <meta name="apple-mobile-web-app-status-bar-style" content="black"> -->
+    <meta name="apple-mobile-web-app-title" content="OWA">
+    <link rel="apple-touch-icon-precomposed" href="../../images/ios-desktop.png">
+
+    <link rel="shortcut icon" href="../../images/favicon.png">
     <!-- hosted css's -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.css">
@@ -55,7 +67,7 @@
         }
 
         $.ajax({
-  				url: "pautas/saveedit.php",
+  				url: "saveedit.php",
   				type: "POST",
   				data:'col='+column + '&val='+innedit + '&id='+id + '&sd='+sd + '&sc='+sc,
   				success: function(data){
@@ -93,8 +105,15 @@
   		}
 
       function plsedit(t){
+        $(t).keyup(function(){
+          if ((t.parentElement.children[1].innerHTML !== (null||""||NaN)) || (t.parentElement.children[2].innerHTML !== (null||""||NaN)) || (t.parentElement.children[3].innerHTML !== (null||""||NaN))){
+            var notafinal = (parseInt(t.parentElement.children[1].innerHTML) + parseInt(t.parentElement.children[2].innerHTML) + parseInt(t.parentElement.children[3].innerHTML))/3;
+            $(t.parentElement.children[4]).text(Math.ceil(notafinal));
+          }
+        });
+
         t.setAttribute('contenteditable', 'true');
-        showEdit(t)
+        showEdit(t);
       }
 
       function loadtable(e){
@@ -103,7 +122,7 @@
         $("#ktable").html('<div style="margin: 40px" class="la-ball-fall la-dark"><div></div><div></div><div></div></div>');
 
         $.ajax({
-  				url: "pautas/addnotas.php",
+  				url: "addnotas.php",
   				type: "POST",
           data: 'sd='+sd+'&sc='+sc,
   				success: function(response){
@@ -115,6 +134,10 @@
   				}
   		   });
       }
+
+      $(function(){
+
+      });
 		</script>
   </head>
 
@@ -142,17 +165,17 @@
     <main class="mdl-layout__content">
       <!-- page content -->
 
-      <div class="mdl-grid" style="margin-bottom: 220px;">
-        <div style="margin-top: 30px; border-radius: 15px; padding: 20px" class="mdl-cell mdl-cell--4-col mdl-cell--12-col-phone mdl-cell--12-col-tablet mdl-color--grey-200 mdl-shadow--4dp">
+      <div class="mdl-grid" style="margin-bottom: 350px;">
+        <div style="margin-top: 30px; border-radius: 15px; padding: 20px" class="mdl-cell mdl-cell--3-col mdl-cell--12-col-phone mdl-cell--12-col-tablet mdl-color--grey-200 ">
           <h2 class="mdl-color-text--grey-800" style="margin-bottom: 0px"><strong>Administração</strong></h2>
           <div style="padding-top: 30px">
 
-            <a href="../alunos/editaluno" style="text-transform: none; width: 100%; text-align: left" class="ui basic button">
+            <a href="../alunos/editaluno/" style="text-transform: none; width: 100%; text-align: left" class="ui basic button">
               <i class="ui edit outline black icon"></i>
               Alunos registados
             </a>
 
-            <a href="../alunos/addaluno" style="text-transform: none; width: 100%; margin-top: 10px; text-align: left" class="ui basic button">
+            <a href="../alunos/addaluno/" style="text-transform: none; width: 100%; margin-top: 10px; text-align: left" class="ui basic button">
               <i class="ui add user black icon"></i>
               Adicionar aluno(s)
             </a>
@@ -166,7 +189,7 @@
               Pautas
             </a>
 
-            <a href="mensalidades" style="text-transform: none; width: 100%; margin-top: 10px; text-align: left" class="ui basic button">
+            <a href="../mensalidades/" style="text-transform: none; width: 100%; margin-top: 10px; text-align: left" class="ui basic button">
               <i class="ui money bill black alternate outline icon"></i>
               Mensalidades
             </a>
@@ -174,16 +197,16 @@
 
           <a href="../logout.php" style="margin-top: 10px;" class="ui labeled icon red button">
             <i class="log out icon"></i>
-            Log Out
+            Sair da conta
           </a>
         </div>
         <!--  opacity: .3; pointer-events: none -->
         <!-- EDITAR NOTAS -->
-        <div style="margin-top: 30px; padding: 20px; border-radius: 15px; overflow-x: auto" class="mdl-cell mdl-cell--8-col mdl-cell--12-col-phone mdl-cell--12-col-tablet mdl-color--grey-300 mdl-shadow--4dp">
+        <div style="margin-top: 30px; padding: 20px; border-radius: 15px; overflow-x: auto" class="mdl-cell mdl-cell--9-col mdl-cell--12-col-phone mdl-cell--12-col-tablet mdl-color--grey-300">
           <h2 class="mdl-color-text--grey-500" style="margin-bottom: 0px"><strong>Pautas</strong></h2>
-          <h4 class="mdl-color-text--grey-700" style="margin-top: 0px"><strong><?php echo date("Y") ?></strong></h4>
+          <h4 class="mdl-color-text--grey-700" style="margin-top: 0px"><strong>Ano Lectivo de <?php echo date("Y") ?></strong></h4>
 
-          <div class="select">
+          <div class="select hoverable">
             <select id="classee">
                 <option selected disabled>Classe    </option>
                 <option value="1a">       1a Classe </option>
@@ -193,7 +216,7 @@
             </select>
           </div>
 
-          <div class="select">
+          <div class="select hoverable">
             <select id="disciplinaa" onchange="loadtable(this)">
                 <option selected disabled>    Disciplina      </option>
                 <!-- <option value="port_">   Português       </option>
@@ -211,8 +234,8 @@
             <thead>
               <tr>
                 <th class="center aligned" rowspan="2">Nome      </th>
-                <th class="center aligned" colspan="3">Trimestre</th>
-                <th class="center aligned" rowspan="2">Anual     </th>
+                <th class="center aligned" colspan="3">Média Trimestral</th>
+                <th class="center aligned" rowspan="2">Média<br>Anual     </th>
               </tr>
               <tr>
                 <th class="center aligned">1º</th>
@@ -227,20 +250,42 @@
           </table>
 
         </div>
-      </div>
 
-      <footer style="text-align: center;" class="mdl-mega-footer">
+      </div>
+      <!-- 2326 build -->
+      <footer id="footer" style="text-align: center; font-family: karma" class="mdl-mega-footer mdl-color--grey-100">
         <div class="mdl-mega-footer__middle-section">
         </div>
 
         <div class="mdl-mega-footer__bottom-section">
           <div class="mdl-layout-spacer"></div>
-          <div><script>document.write((new Date()).getFullYear())</script> © One World Academy Elementary School</div>
+
+          <img src="../../images/logo.png" width='32px' alt="">
+          <p style="margin-bottom: 0px; cursor: none; font-size: 14px">1 Bairro Eduardo Mondlane</p>
+          <p style="margin-top: 0px; margin-bottom: 0px; font-size: 14px">Maxixe, Moçambique</p>
+          <!-- <p style="margin-top: 0px">Phone: </p> -->
+          <p style="margin-top: 0px; margin-bottom: 0px; font-size: 14px">Phone: <a href="tel:+258843549804">+258 84-354-9804</a></p>
+          <p style="margin-top: 0px; font-size: 14px">Email: <a target="_blank" href="mailto:oneworldacademymz@gmail.com">oneworldacademymz@gmail.com</a></a>
+          <h6 style="font-size: 14px; font-family: karma"><strong>Copyright © <script>document.write((new Date()).getFullYear())</script> <span class="mdl-color-text--green-300">One World Academy Primary School</span></strong></h6>
+
+          <!-- <ul class="mdl-mega-footer__link-list">
+            <li><a href="#">About</a></li>
+            <li><a href="#">Terms</a></li>
+            <li><a href="#">Partners</a></li>
+            <li><a href="#">Updates</a></li>
+          </ul> -->
+        <div class="mdl-layout-spacer"></div>
+
+          <!-- <div><script>document.write((new Date()).getFullYear())</script> © One World Academy Elementary School</div>
           <p>Maxixe, Mozambique</p>
           <div>All rights reserved.</div>
           <p class="mdl-color-text--red-400">Notice: This web app is under development. Build_nr. A<script>document.write(localStorage.getItem("app_version_owa"))</script></p>
-
-          <div class="mdl-layout-spacer"></div>
+          <div class="ui buttons">
+            <button class="ui disabled button">Change to</button>
+            <button class="ui icon button">
+              Portuguese
+            </button>
+          </div> -->
         </div>
       </footer>
     </main>
@@ -252,8 +297,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.js"></script>
     <script src="../../required/js/material-components-web/dist/material-components-web.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tabulator/3.4.4/js/tabulator.min.js"></script>
-    <script type="text/javascript" src="js/app.js"></script>
-
-
+    <script type="text/javascript" src="../js/app.js"></script>
   </body>
 </html>

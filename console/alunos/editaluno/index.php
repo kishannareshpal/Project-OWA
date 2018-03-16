@@ -5,149 +5,15 @@
   // }
 
   # code...
-  include('../../../parents/session.php'); // Includes session Script
+  include('../../../alunos/session.php'); // Includes session Script
   // include_once('notas/notas.php'); // Includes session Script
   // include('tabledata.php');
 
-  if ($_SESSION['login_user'] !== "oneworldacademy") {
+  if ($_COOKIE['lu'] !== "owa") {
     @header("location: ../../../"); // Redirect To Profile Page
     print_r("Error 405");
     die();
-  }
-
-  $conn = mysqli_connect("oneworldacademymz.com", "oneworv0_admin", "admin", "oneworv0_students") or die ('I cannot connect to the database.');
-
-  if (isset($_POST['addstudent'])) {
-    // $classeRaw = $_POST['slectclasse']; // like 1a, 2a, 3a...
-    $importedfile = $_FILES['file']['tmp_name'];
-    $date_year = date("Y");
-
-    if ($importedfile == null) {
-      $error = "Por favor selecione o ficheiro para continuar.";
-    } else {
-      # code...
-      // $classe = $classeRaw.' Classe'; // like 1a Classe, 2a Classe, 3a Cl...
-
-      $disciplinas_1a = ["port_1a", "mat_1a", "ing_1a", "artesvisuais_1a", "musica_1a", "edf_1a", "danca_1a"];
-      $disciplinas_2a = ["port_2a", "mat_2a", "ing_2a", "artesvisuais_2a", "musica_2a", "edf_2a", "danca_2a"];
-      $disciplinas_3a = ["port_3a", "mat_3a", "ing_3a", "artesvisuais_3a", "musica_3a", "edf_3a", "danca_3a", "cnaturais_3a"];
-      $disciplinas_4a = ["port_4a", "mat_4a", "ing_4a", "artesvisuais_4a", "musica_4a", "edf_4a", "danca_4a", "cnaturais_4a", "csociais_4a"];
-
-      mysqli_query($conn, '
-          LOAD DATA LOCAL INFILE "'.$importedfile.'"
-              INTO TABLE temp_profiles
-              FIELDS TERMINATED by \',\'
-              LINES TERMINATED BY \'\n\'
-      ');
-
-      $sql = 'INSERT INTO profiles (first_name, last_name, username, started_year) SELECT * FROM temp_profiles';
-      $red_sql = mysqli_query($conn, $sql);
-
-      $sql = 'INSERT INTO mensalidades (id, payment_year) SELECT id, started_year FROM profiles, temp_profiles WHERE profiles.username=temp_profiles.username';
-      $red_sql = mysqli_query($conn, $sql);
-
-      foreach ($disciplinas_1a as $disciplina) {
-        $query3 = "INSERT INTO `$disciplina`(nome_id, year) SELECT id, started_year FROM profiles, temp_profiles WHERE profiles.username=temp_profiles.username";
-        $red_sql1 = mysqli_query($conn, $query3);
-      };
-
-      $sql = 'TRUNCATE temp_profiles';
-      $conn->query($sql);
-
-      $error = mysqli_error($conn);
-
-      // $file = fopen($importedfile, 'r');
-      // while ($row = fgetcsv($file)) {
-      //   $value = "'".implode("','", $row)."'";
-      //   $username = explode(',', $value)[2];
-      //   // var_dump($value);
-      //   // var_dump($username);
-      //
-      //
-      //   if ($classeRaw=="1a") {
-      //     // insert data to 1a classe
-      //     $query0 = "INSERT INTO profiles(first_name, last_name, username, started_year, grade) VALUES (". $value.",'" . $classe . "'" .")";
-      //     mysqli_query($conn, $query0);
-      //
-      //     $query2 = "SELECT id FROM profiles WHERE username=$username";
-      //     $red_sql = mysqli_query($conn, $query2);
-      //     $id_of_new_user = mysqli_fetch_assoc($red_sql);
-      //     $id = $id_of_new_user['id'];
-      //
-      //     // $query1 = "INSERT INTO mensalidades(id) VALUES (". $id.")";
-      //     // mysqli_query($conn, $query1);
-      //
-      //     foreach ($disciplinas_1a as $disciplina) {
-      //       $query3 = "INSERT INTO `$disciplina`(nome_id, year) VALUES ('$id', '$date_year')";
-      //       // var_dump($query3);
-      //       $red_sql1 = mysqli_query($conn, $query3);
-      //     };
-      //
-      //   } else if ($classeRaw=="2a") {
-      //     // insert data to 2a classe
-      //     $query0 = "INSERT INTO profiles(first_name, last_name, username, started_year, grade) VALUES (". $value.",'" . $classe . "'" .")";
-      //     mysqli_query($conn, $query0);
-      //
-      //     $query2 = "SELECT id FROM profiles WHERE username=$username";
-      //     $red_sql = mysqli_query($conn, $query2);
-      //     $id_of_new_user = mysqli_fetch_assoc($red_sql);
-      //     $id = $id_of_new_user['id'];
-      //
-      //     $query1 = "INSERT INTO mensalidades(id) VALUES (". $id.")";
-      //     mysqli_query($conn, $query1);
-      //
-      //     foreach ($disciplinas_2a as $disciplina) {
-      //       $query3 = "INSERT INTO `$disciplina`(nome_id, year) VALUES ('$id', '$date_year')";
-      //       // var_dump($query3);
-      //       $red_sql1 = mysqli_query($conn, $query3);
-      //     };
-      //
-      //
-      //   } elseif ($classeRaw=="3a") {
-      //     // insert data to 3a classe
-      //     $query0 = "SET autocommit=0; INSERT INTO profiles(first_name, last_name, username, started_year, grade) VALUES (". $value.",'" . $classe . "'" ."); COMMIT";
-      //     mysqli_query($conn, $query0);
-      //
-      //     $query2 = "SELECT id FROM profiles WHERE username=$username";
-      //     $red_sql = mysqli_query($conn, $query2);
-      //     $id_of_new_user = mysqli_fetch_assoc($red_sql);
-      //     $id = $id_of_new_user['id'];
-      //
-      //     $query1 = "INSERT INTO mensalidades(id) VALUES (". $id.")";
-      //     mysqli_query($conn, $query1);
-      //
-      //     foreach ($disciplinas_3a as $disciplina) {
-      //       $query3 = "INSERT INTO `$disciplina`(nome_id, year) VALUES ('$id', '$date_year')";
-      //       // var_dump($query3);
-      //       $red_sql1 = mysqli_query($conn, $query3);
-      //     };
-      //
-      //
-      //   } elseif ($classeRaw=="4a") {
-      //     // insert data to 4a classe
-      //     $query0 = "INSERT INTO profiles(first_name, last_name, username, started_year, grade) VALUES (". $value.",'" . $classe . "'" .")";
-      //     mysqli_query($conn, $query0);
-      //
-      //     $query2 = "SELECT id FROM profiles WHERE username=$username";
-      //     $red_sql = mysqli_query($conn, $query2);
-      //     $id_of_new_user = mysqli_fetch_assoc($red_sql);
-      //     $id = $id_of_new_user['id'];
-      //
-      //     $query1 = "INSERT INTO mensalidades(id) VALUES (". $id.")";
-      //     mysqli_query($conn, $query1);
-      //
-      //     foreach ($disciplinas_4a as $disciplina) {
-      //       $query3 = "INSERT INTO `$disciplina`(nome_id, year) VALUES ('$id', '$date_year')";
-      //       // var_dump($query3);
-      //       $red_sql1 = mysqli_query($conn, $query3);
-      //     };
-      //   }
-      // }
-
-      $success = "Alunos adicionados com sucesso.";
-    }
-
-  }
+  };
 ?>
 
 
@@ -156,9 +22,25 @@
   <head>
     <!-- TODO: Add essential meta tags later -->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Console - OWA</title>
+    <meta author="www.oneworldacademymz.com">
+    <meta co-author="Kishan Nareshpal Jadav">
+    <title>Alunos - OWA Console</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="One World Academy">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="../../../images/android-desktop.png">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- Depprecated -->
+    <!-- <meta name="apple-mobile-web-app-status-bar-style" content="black"> -->
+    <meta name="apple-mobile-web-app-title" content="OWA">
+    <link rel="apple-touch-icon-precomposed" href="../../../images/ios-desktop.png">
+
+    <link rel="shortcut icon" href="../../../images/favicon.png">
     <!-- hosted css's -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.css">
@@ -168,12 +50,167 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tabulator/3.4.4/css/tabulator.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../../required/css/app.css">
+    <link rel="stylesheet" href="../../../required/css/semantic-ui-alerts.min.css">
+
+
+    <style>
+      .hoverable {
+        -webkit-transition: -webkit-box-shadow .25s;
+        transition: -webkit-box-shadow .25s;
+        transition: box-shadow .25s;
+        transition: box-shadow .25s, -webkit-box-shadow .25s;
+      }
+
+        .hoverable:hover {
+          -webkit-box-shadow: 0 1px 1px 0 rgba(115, 196, 108, 0.35), 0 2px 4px 0 rgba(0, 0, 0, 0.19);
+                  box-shadow: 0 1px 1px 0 rgba(115, 196, 108, 0.35) 0 2px 4px 0 rgba(0, 0, 0, 0.19);
+        }
+
+    </style>
 
     <script src="//code.jquery.com/jquery-latest.min.js"></script>
 
     <script type="text/javascript">
-      function showmethis(){
-        $('.ui.modal').modal('show');
+      var ided;
+
+      function loadtable(e){
+        var sc = e.value;
+        $("#ktable").html('<div style="margin: 40px" class="la-ball-fall la-dark"><div></div><div></div><div></div></div>');
+
+        $.ajax({
+          url: "loadtable.php",
+          type: "GET",
+          data: 'sc='+sc,
+          success: function(response){
+            if (response === "") {
+              $("#ktable").html("<div style='margin: 40px' class='mdl-color-text--red-200'>Nenhum aluno foi encontrado.</div>");
+            } else {
+              $("#ktable").html(response);
+            }
+          }
+        });
+      }
+
+
+      function plsremove(e){
+        ided=e.id;
+        var cl = $('#classee').val();
+        $('#__alunoname').html(e.parentElement.children[0].innerHTML);
+
+        $('#removemodal').modal({
+          closable  : false,
+          onApprove : function() {
+            $('#rmvmepls').html('<i class="minus square icon"></i><span class="spinner"><div class="bounce1 mdl-color--white"></div><div class="bounce2 mdl-color--white"></div><div class="bounce3 mdl-color--white"></div></span>');
+            $("#"+ided).parent()[0].children[1].innerHTML='<span class="spinner"><div class="bounce1 mdl-color--red-300"></div><div class="bounce2 mdl-color--red-300"></div><div class="bounce3 mdl-color--red-300"></div></span>';
+            $('#kktable').css({'pointer-events': 'none'});
+            $.ajax({
+      				url: "rmedit.php",
+      				type: "POST",
+              data: {
+                id: ided,
+                classe: cl
+              },
+      				success: function(response){
+                $("#"+ided).parent()[0].children[1].innerHTML='<i class="trash alternate outline icon"></i>';
+                $('#kktable').css({'pointer-events': ''});
+                $.suiAlert({
+                  title: 'Sucesso!',
+                  description: 'Aluno(a) removido(a) com sucesso.',
+                  type: 'success',
+                  time: '5',
+                  position: 'bottom-left',
+                });
+                loadtable(document.getElementById('classee'));
+
+      				}
+      		  });
+          }
+        }).modal('show');
+
+      }
+
+      function svme(){
+        var istoreset = false;
+        var prnome    = $('#_prnome').val();
+        var ulnome    = $('#_ulnome').val();
+        var usrnome   = $('#_usrnamme').val();
+
+        if ($('#rstCheck').length === 1) {
+          istoreset = document.getElementById('rstCheck').checked;
+        }
+
+        $.ajax({
+  				url: "svedit.php",
+  				type: "POST",
+          data: {
+            id: ided,
+            first_name: prnome,
+            last_name: ulnome,
+            username: usrnome,
+            isToReset: istoreset
+          },
+  				success: function(response){
+            $("#"+ided).parent()[0].children[2].innerHTML='<i class="pencil alternate yellow icon"></i>';
+            $('.green.approve.button').html('<i class="save icon"></i>Guardar');
+            $('#kktable').css({'pointer-events': ''});
+            $.suiAlert({
+              title: 'Sucesso!',
+              description: 'Informação do(a) Aluno(a) editado com sucesso.',
+              type: 'success',
+              time: '5',
+              position: 'bottom-left',
+            });
+  				}
+  		  });
+      }
+
+      function plseditme(e){
+        ided = e.id;
+        $("#"+ided).parent()[0].children[2].innerHTML='<span class="spinner"><div class="bounce1 mdl-color--black"></div><div class="bounce2 mdl-color--black"></div><div class="bounce3 mdl-color--black"></div></span>';
+        $('#kktable').css({'pointer-events': 'none'});
+
+        $.ajax({
+  				url: "loadeditable.php",
+  				type: "GET",
+          data: {
+            id: ided
+          },
+          dataType: 'json',
+  				success: function(response){
+            if (response === "") {
+              // oops. bad fuckery happened here
+              alert('Error: 809');
+              $("#"+ided).parent()[0].children[2].innerHTML='<i class="pencil alternate yellow icon"></i>';
+
+            } else {
+              $('#_prnome').val(response[0]['first_name']);
+              $('#_ulnome').val(response[0]['last_name']);
+              $('#_usrnamme').val(response[0]['username']);
+              if (response[0]['password'] !== "no") {
+                $('#_cnfg').html(
+                  '<span id="iscnfg" class="mdl-color-text--green"><strong>Configurado</strong></span>'+
+                  ' | '+
+                  '<span class="ui checkbox"><input type="checkbox" id="rstCheck"><label>Resetar a senha</label></span>'
+                );
+              } else {
+                $('#_cnfg').html('<span id="iscnfg" class="mdl-color-text--red"><strong>Não Configurado</strong></span>');
+              }
+
+              $("#"+ided).parent()[0].children[2].innerHTML='<i class="pencil alternate yellow icon"></i>';
+              $('#kktable').css({'pointer-events': ''});
+              $('#editmodal').modal({
+                closable  : false,
+                onApprove : function() {
+                  $("#"+ided).parent()[0].children[2].innerHTML='<span class="spinner"><div class="bounce1 mdl-color--black"></div><div class="bounce2 mdl-color--black"></div><div class="bounce3 mdl-color--black"></div></span>';
+                  $('.green.approve.button').html('<i class="save icon"></i><span class="spinner"><div class="bounce1 mdl-color--white"></div><div class="bounce2 mdl-color--white"></div><div class="bounce3 mdl-color--white"></div></span>');
+                  $('#kktable').css({'pointer-events': 'none'});
+                  svme();
+                  return false;
+                }
+              }).modal('show');
+            }
+  				}
+  		  });
       }
     </script>
   </head>
@@ -203,7 +240,7 @@
       <!-- page content -->
 
       <div class="mdl-grid" style="margin-bottom: 350px;">
-        <div style="margin-top: 30px; border-radius: 15px; padding: 20px" class="mdl-cell mdl-cell--4-col mdl-cell--12-col-phone mdl-cell--12-col-tablet mdl-color--grey-200 mdl-shadow--4dp">
+        <div style="margin-top: 30px; border-radius: 15px; padding: 20px" class="mdl-cell mdl-cell--3-col mdl-cell--12-col-phone mdl-cell--12-col-tablet mdl-color--grey-200">
           <h2 class="mdl-color-text--grey-800" style="margin-bottom: 0px"><strong>Administração</strong></h2>
           <div style="padding-top: 30px">
 
@@ -219,9 +256,9 @@
           </div>
 
           <div class="ui divider"></div>
-          
+
           <div>
-            <a href="../../pautas" style="text-transform: none; width: 100%; text-align: left" class="ui basic button">
+            <a href="../../pautas/" style="text-transform: none; width: 100%; text-align: left" class="ui basic button">
               <i class="ui file alternate black icon"></i>
               Pautas
             </a>
@@ -234,7 +271,7 @@
 
           <a href="../../logout.php" style="margin-top: 10px;" class="ui labeled icon red button">
             <i class="log out icon"></i>
-            Log Out
+            Sair da conta
           </a>
         </div>
 
@@ -244,24 +281,140 @@
 
         <!--  opacity: .3; pointer-events: none -->
         <!-- EDITAR NOTAS -->
-        <div style="margin-top: 30px; padding: 20px; border-radius: 15px; overflow-x: auto" class="mdl-cell mdl-cell--8-col mdl-cell--12-col-phone mdl-cell--12-col-tablet mdl-color--grey-300 mdl-shadow--4dp">
+        <div style="margin-top: 30px; padding: 20px; border-radius: 15px; overflow-x: auto" class="mdl-cell mdl-cell--9-col mdl-cell--12-col-phone mdl-cell--12-col-tablet mdl-color--grey-300">
           <h2 class="mdl-color-text--grey-500" style="margin-bottom: 0px"><strong>Alunos Registados</strong></h2>
+
+          <div class="select hoverable">
+            <select id="classee" onchange="loadtable(this)">
+                <option selected disabled>Classe    </option>
+                <option value="1a">       1a Classe </option>
+                <option value="2a">       2a Classe </option>
+                <option value="3a">       3a Classe </option>
+                <option value="4a">       4a Classe </option>
+            </select>
+          </div>
+
+          <span data-inverted='' data-tooltip='Atualizar a tabela' data-position='right center' style="position: relative; top: 5px; left: 10px">
+            <i onclick="loadtable(document.getElementById('classee'))" style="cursor: pointer" class="refresh blue icon"></i>
+          </span>
+
+          <table id="kktable" class="ui celled selectable unstackable structured table">
+            <thead>
+              <tr>
+                <th class="center aligned twelve wide" rowspan="2">Nome</th>
+                <th class="center aligned four wide" colspan="2">Operação</th>
+              </tr>
+              <tr>
+                <th class="center aligned">Remover</th>
+                <th class="center aligned">Editar</th>
+              </tr>
+            </thead>
+
+            <tbody id="ktable" class="mdl-color-text--black">
+
+            </tbody>
+          </table>
+
+
+          <div id='removemodal' class="ui mini modal">
+            <!-- <i class="close icon"></i> -->
+            <div class="header">
+              <i class="trash alternate outline red icon"></i>&nbsp Confirmar
+            </div>
+            <div class="content">
+              <div class="description">
+                Tem a certeza que deseja remover o(a) aluno(a) <span class="mdl-color-text--green-500" id='__alunoname'></span>?
+              </div>
+            </div>
+            <div class="actions">
+              <div id='rmvmepls' class="ui labeled icon red approve button">
+                <i class="minus square icon"></i>
+                Sim, remover
+              </div>
+              <div class="ui grey deny button">
+                Fechar
+              </div>
+            </div>
+          </div>
+
+          <div id="editmodal" class="ui fullscreen modal">
+            <div class="header"><i class="pencil alternate yellow icon"></i>&nbsp Editar</div>
+            <div class="content">
+              <h4 class="ui dividing header">• Identificação</h4>
+              <p>Primeiro Nome:
+                <span class="ui input fluid">
+                  <input id="_prnome" type="text" autocomplete="name" placeholder="primeiro nome...">
+                </span>
+              </p>
+              <p>Último Nome (Apelido):
+                <span class="ui input fluid">
+                  <input id="_ulnome" type="text" autocomplete="name" placeholder="apelido...">
+                </span>
+              </p>
+
+              <h4 class="ui dividing header">• Cadastro</h4>
+              <p>Nome do usuário (Username):
+                <span class="ui input fluid">
+                  <input id="_usrnamme" type="text" autocomplete="username" placeholder="username...">
+                </span>
+              </p>
+
+              <p style="margin-bottom:0">Senha (Password):</p>
+              <div style="margin-top:0">
+                <div class="ui compact mdl-color--white message">
+                  <span id='_cnfg'>
+                  </span>
+                </div>
+
+              </div>
+
+            </div>
+            <div class="actions">
+              <div class="ui grey deny button">
+                Fechar
+              </div>
+              <div class="ui labeled icon green approve button">
+                <i class="save icon"></i>Guardar
+              </div>
+            </div>
+          </div>
 
         </div>
       </div>
 
-      <footer style="text-align: center;" class="mdl-mega-footer">
+      <footer id="footer" style="text-align: center; font-family: karma" class="mdl-mega-footer mdl-color--grey-100">
         <div class="mdl-mega-footer__middle-section">
         </div>
 
         <div class="mdl-mega-footer__bottom-section">
           <div class="mdl-layout-spacer"></div>
-          <div><script>document.write((new Date()).getFullYear())</script> © One World Academy Elementary School</div>
+
+          <img src="../../../images/logo.png" width='32px' alt="">
+          <p style="margin-bottom: 0px; cursor: none; font-size: 14px">1 Bairro Eduardo Mondlane</p>
+          <p style="margin-top: 0px; margin-bottom: 0px; font-size: 14px">Maxixe, Moçambique</p>
+          <!-- <p style="margin-top: 0px">Phone: </p> -->
+          <p style="margin-top: 0px; margin-bottom: 0px; font-size: 14px">Phone: <a href="tel:+258843549804">+258 84-354-9804</a></p>
+          <p style="margin-top: 0px; font-size: 14px">Email: <a target="_blank" href="mailto:oneworldacademymz@gmail.com">oneworldacademymz@gmail.com</a></a>
+          <h6 style="font-size: 14px; font-family: karma"><strong>Copyright © <script>document.write((new Date()).getFullYear())</script> <span class="mdl-color-text--green-300">One World Academy Primary School</span></strong></h6>
+
+          <!-- <ul class="mdl-mega-footer__link-list">
+            <li><a href="#">About</a></li>
+            <li><a href="#">Terms</a></li>
+            <li><a href="#">Partners</a></li>
+            <li><a href="#">Updates</a></li>
+          </ul> -->
+        <div class="mdl-layout-spacer"></div>
+
+          <!-- <div><script>document.write((new Date()).getFullYear())</script> © One World Academy Elementary School</div>
           <p>Maxixe, Mozambique</p>
           <div>All rights reserved.</div>
           <p class="mdl-color-text--red-400">Notice: This web app is under development. Build_nr. A<script>document.write(localStorage.getItem("app_version_owa"))</script></p>
-
-          <div class="mdl-layout-spacer"></div>
+          <div class="ui buttons">
+            <button class="ui disabled button">Change to</button>
+            <button class="ui icon button">
+              Portuguese
+            </button>
+          </div> -->
         </div>
       </footer>
     </main>
@@ -273,6 +426,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.js"></script>
     <script src="../../../required/js/material-components-web/dist/material-components-web.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tabulator/3.4.4/js/tabulator.min.js"></script>
+    <script src="../../../required/js/semantic-ui-alerts.min.js"></script>
     <!-- <script src="../js/app.js"></script> -->
 
 
