@@ -1,6 +1,17 @@
 	<!DOCTYPE html>
 	<html lang="en_US">
 	<head>
+
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-108236694-2"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+
+			gtag('config', 'UA-108236694-2');
+		</script>
+		
 	  <!-- TODO: Add essential meta tags later -->
 	  <meta charset="UTF-8">
 	  <meta author="www.oneworldacademymz.com">
@@ -43,6 +54,7 @@
 	      font-family: 'karma';
 	    }
 	  </style>
+
 
 	  <script src="//code.jquery.com/jquery-latest.min.js"></script>
 	  <script src="required/js/slidejs/source/jquery.slides.min.js"></script>
@@ -117,14 +129,14 @@
 	        <div style="height: 150px; padding-left: 5px" class="mdl-layout__header-row mdl-shadow--4dp">
 	          <div class="mdl-layout-spacer"></div>
 	          <!-- Title -->
-	          <span><img src="images/logo.png" width='50px'></span>
-	          <span class="mdl-layout-title">
-	            <span style="font-family: 'Karma'; font-size: 18px; text-shadow: 1px 1px rgba(43, 43, 43, 0.8);">
-	              <strong>One World Academy</strong>
-	            </span>
-	            <h3 style="font-family: 'Karma'; font-size: 14px; margin-bottom: 0px; text-shadow: 1px 1px rgba(43, 43, 43, 0.8); margin-top: 0px" class="mdl-layout-title"><strong>Primary School</strong></h3>
-	            <h5 style="font-family: 'Karma'; font-size: 14px; margin-bottom: 0px; margin-top: 0px" class="mdl-layout-title mdl-color-text--grey-700"><strong>Maxixe, Mozambique</strong></h5>
-	          </span>
+	          <span><img src="images/logo.png" width='60px'></span>
+						<span class="mdl-layout-title">
+							<span style="font-family: 'Karma'; font-size: 18px; text-shadow: 1px 1px rgba(43, 43, 43, 0.8);">
+								<strong>One World Academy</strong>
+							</span>
+							<h3 style="font-family: 'Karma'; font-size: 14px; margin-bottom: 0px; text-shadow: 1px 1px rgba(43, 43, 43, 0.8); margin-top: 0px" class="mdl-layout-title"><strong>Primary School</strong></h3>
+							<h5 style="font-family: 'Karma'; font-size: 14px; margin-bottom: 0px; margin-top: 0px" class="mdl-layout-title mdl-color-text--grey-700"><strong>Maxixe, Mozambique</strong></h5>
+						</span>
 	          <!-- Add spacer, to align navigation to the right -->
 	          <div class="mdl-layout-spacer"></div>
 	        </div>
@@ -202,7 +214,7 @@
 	                <!-- <div class="mdl-layout-spacer"></div> -->
 	                  <div style="padding: 15px; overflow-x: auto;">
 	                    <h1 class="bg-grad" style="border-radius: 5px 50px 5px 5px; padding: 10px; font-size: 40px; padding-left: 15px; text-shadow: 3px 3px rgba(168, 217, 178, 0.63); opacity: .7"><strong>Our School</strong></h1>
-	                    <p class="mdl-color-text--grey-400">Monday, February 26th, 2018</p>
+	                    <p class="mdl-color-text--grey-400"><time datetime="2018-02-26">Monday, February 26th, 2018</time></p>
 
 	                    <!-- ... content ... Open Sans -->
 	                    <div style="font-size: 18px; font-family: 'karma', sans-serif; line-height: 1.6;">
@@ -267,6 +279,7 @@
 
 	            </div>
 	          </div>
+
 	        </div>
 	        <div class="mdl-layout-spacer"></div>
 	      </div>
@@ -282,9 +295,9 @@
 	          <p style="margin-bottom: 0px; cursor: none; font-size: 14px">1 Bairro Eduardo Mondlane</p>
 	          <p style="margin-top: 0px; margin-bottom: 0px; font-size: 14px">Maxixe, Mozambique</p>
 	          <p style="margin-top: 0px; margin-bottom: 0px; font-size: 14px">Phone: <a href="tel:+258843549804">+258 84-354-9804</a></p>
-	          <p style="margin-top: 0px; font-size: 14px">Email: <a target="_blank" href="mailto:oneworldacademymz@gmail.com">oneworldacademymz@gmail.com</a></a>
+	          <p style="margin: 0px; font-size: 14px">Email: <a target="_blank" href="mailto:oneworldacademymz@gmail.com">oneworldacademymz@gmail.com</a></p>
+						<!-- <p style="margin: 0px; font-size: 14px"><a href='privacy/' class="mdl-color-text--blue-200">Privacy</a> & <a href='tos/' class="mdl-color-text--blue-200">Terms</a></p> -->
 	          <h6 style="font-size: 14px; font-family: karma"><strong>Copyright © <script>document.write((new Date()).getFullYear())</script> <span class="mdl-color-text--green-300">One World Academy Primary School</span></strong></h6>
-
 	        <div class="mdl-layout-spacer"></div>
 
 	        </div>

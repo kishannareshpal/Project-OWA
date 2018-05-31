@@ -1,13 +1,9 @@
 <?php
-  // If entered illegally
-  // if(!isset($_POST['submit'])){
-  //   header("location: ../"); // Redirect To Profile Page
-  // }
 
   # code...
   include('../../alunos/session.php'); // Includes session Script
 
-  if ($_COOKIE['lu'] !== "professor") {
+  if ($_COOKIE['lu'] !== "owa") {
     @header("location: ../../"); // Redirect To Profile Page
     print_r("Error 405");
     die();
@@ -77,6 +73,7 @@
   				success: function(data){
             // console.log(data);
             if (data === "done") {
+              $(editableObj).removeClass('positive negative');
               $(editableObj).animate({backgroundColor: '#defcb3'});
               setTimeout(function () {
                 $(editableObj).animate({backgroundColor: '#ffffff'});
@@ -97,6 +94,7 @@
               editableObj.setAttribute('contenteditable', 'false');
 
             } else { //if (data === "error")
+              $(editableObj).removeClass('positive negative');
               $(editableObj).animate({backgroundColor: '#fcb3b3'});
               setTimeout(function () {
                 $(editableObj).animate({backgroundColor: '#ffffff'});
@@ -171,18 +169,28 @@
 
       <div class="mdl-grid" style="margin-bottom: 350px;">
         <div style="margin-top: 30px; border-radius: 15px; padding: 20px" class="mdl-cell mdl-cell--3-col mdl-cell--12-col-phone mdl-cell--12-col-tablet mdl-color--grey-200 ">
-          <h2 class="mdl-color-text--grey-800" style="margin-bottom: 0px"><strong>O Professor</strong></h2>
-          <div class="ui divider"></div>
-          <div style="">
+          <h2 class="mdl-color-text--grey-800" style="margin-bottom: 0px"><strong>Professor</strong></h2>
+
+
+          <div>
             <a href="#" style="text-transform: none; width: 100%; text-align: left" class="ui blue button">
               <i class="ui file alternate white icon"></i>
               Pautas
             </a>
+
+            <span>
+              <button style="cursor: default; margin-right: 0px; width: 10%; float: left; text-transform: none; margin-top: 10px; text-align: left" class="ui mdl-color--grey-200 button">
+                <i class="ui long arrow alternate right black icon"></i>
+              </button>
+
+              <a href="resultados/" style="margin-right: 0px; width: 80%; float: right; text-transform: none; margin-top: 10px; text-align: left" class="ui basic button">
+                <i class="ui file alternate outline black icon"></i>
+                Resultados
+              </a>
+            </span>
           </div>
 
-          <div class="ui divider"></div>
-
-          <a href="../logout.php" style="margin-top: 10px;" class="ui labeled icon red button">
+          <a href="../logout.php" style="margin-top: 60px;" class="ui labeled icon red button">
             <i class="log out icon"></i>
             Sair da conta
           </a>
@@ -191,9 +199,9 @@
         <!-- EDITAR NOTAS -->
         <div style="margin-top: 30px; padding: 20px; border-radius: 15px; overflow-x: auto" class="mdl-cell mdl-cell--9-col mdl-cell--12-col-phone mdl-cell--12-col-tablet mdl-color--grey-300">
           <h2 class="mdl-color-text--grey-500" style="margin-bottom: 0px"><strong>Pautas</strong></h2>
-          <h4 class="mdl-color-text--grey-700" style="margin-top: 0px"><strong><?php echo date("Y") ?></strong></h4>
+          <h4 class="mdl-color-text--grey-700" style="margin-top: 0px"><strong>Ano Lectivo de <?php echo date("Y") ?></strong></h4>
 
-          <div class="select">
+          <div class="select hoverable">
             <select id="classee">
                 <option selected disabled>Classe    </option>
                 <option value="1a">       1a Classe </option>
@@ -203,7 +211,7 @@
             </select>
           </div>
 
-          <div class="select">
+          <div class="select hoverable">
             <select id="disciplinaa" onchange="loadtable(this)">
                 <option selected disabled>    Disciplina      </option>
                 <!-- <option value="port_">   Português       </option>
@@ -217,12 +225,12 @@
           </div>
 
 
-          <table class="ui celled selectable unstackable structured table">
+          <table style="overflow-x: scroll" class="ui celled selectable unstackable structured table">
             <thead>
               <tr>
-                <th class="center aligned" rowspan="2">Nome      </th>
-                <th class="center aligned" colspan="3">Trimestre</th>
-                <th class="center aligned" rowspan="2">Anual     </th>
+                <th class="center aligned eight wide" rowspan="2">Nome      </th>
+                <th class="center aligned three wide" colspan="3">Média Trimestral</th>
+                <th class="center aligned one wide" rowspan="2">Média<br>Anual     </th>
               </tr>
               <tr>
                 <th class="center aligned">1º</th>
@@ -237,6 +245,7 @@
           </table>
 
         </div>
+
       </div>
       <!-- 2326 build -->
       <footer id="footer" style="text-align: center; font-family: karma" class="mdl-mega-footer mdl-color--grey-100">

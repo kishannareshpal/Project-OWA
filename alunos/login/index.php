@@ -11,6 +11,15 @@
 <!DOCTYPE html>
 <html lang="pt">
   <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-108236694-2"></script>
+    <script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+
+			gtag('config', 'UA-108236694-2');
+		</script>
     <!-- TODO: Add essential meta tags later -->
     <meta charset="UTF-8">
     <meta author="www.oneworldacademymz.com">
@@ -43,7 +52,11 @@
     <link rel="stylesheet" href="../../required/css/app.css">
 
     <script src="//code.jquery.com/jquery-latest.min.js"></script>
-
+    <script type="text/javascript">
+      function showm(){
+        $('.ui.modal').modal('show');
+      }
+    </script>
 <body class="mdl-color--yellow-100">
   <div id="loader_" class="middler">
     <img src="../../images/logo.png" width='60px'>
@@ -99,7 +112,7 @@
               <div class="required field">
                 <label style="color: grey; margin-bottom: 1px; font-weight: 600;">Senha</label>
                 <input type="password" name="password" placeholder="senha">
-                <a href="?forgot" class="mdl-color-text--green-300" style="font-size: 12px; text-align: right"><u>Esqueceu-se da senha?</u></a>
+                <a onclick="showm()" class="mdl-color-text--green-300" style="font-size: 12px; text-align: right; cursor: pointer"><u>Esqueceu-se da senha?</u></a>
                 <br>
                 <a href="../register/" class="mdl-color-text--grey-700" style="font-size: 12px; text-align: right"><u>Registe a sua conta.</u></a>
               </div>
@@ -132,6 +145,30 @@
         </div>
         <div class="mdl-layout-spacer"></div>
       </div>
+
+      <div class="ui mini modal">
+        <!-- <i class="close icon"></i> -->
+        <div class="header">
+          <i class="ui icon lock"></i>Esquecí-me da senha
+        </div>
+        <div class="content">
+          <div class="description">
+            <strong>O que faço?</strong>
+            <br>
+            Contacte-nos e iremos lhe ajudar.
+            <br><br>
+            <u>Telefone</u>: <a href="tel:+258848241528">+258 848241528</a><br>
+            <u>Email</u>: <a href="mailto:oneworldacademymz@gmail.com">oneworldacademymz@gmail.com</a>
+
+          </div>
+        </div>
+        <div class="actions">
+          <div class="ui grey deny button">
+            Okay!
+          </div>
+        </div>
+      </div>
+
 
       <footer id="footer" hidden style="text-align: center; font-family: karma; opacity: .8" class="mdl-mega-footer mdl-color--grey-50">
         <div class="mdl-mega-footer__middle-section">

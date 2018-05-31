@@ -7,7 +7,7 @@ function spleasechange(e){
 
     $.ajax({
       url: "notas_st.php",
-      type: "POST",
+      type: "GET",
       data: 'sa='+sa,
       success: function(response){
         $("#ktable").html(response);

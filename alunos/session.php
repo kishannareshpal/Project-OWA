@@ -19,7 +19,10 @@
   $ls__grade = $row['grade'];
   $ls__started_year = $row['started_year'];
 
+  // For media final check
+  $identity = date('Y')+$ls__id;
 
+  // Check for todas as classes frequentadas
   $queryred = "SELECT year, '1a Classe' as 'classe' FROM port_1a WHERE nome_id=$ls__id UNION ALL SELECT year, '2a Classe' FROM port_2a WHERE nome_id=$ls__id UNION ALL SELECT year, '3a Classe' FROM port_3a WHERE nome_id=$ls__id UNION ALL SELECT year, '4a Classe' FROM port_4a WHERE nome_id=$ls__id";
   $red_sql_ = mysqli_query($conn, $queryred);
   // @$row_red_ = mysqli_fetch_assoc($red_sql_);
@@ -40,6 +43,20 @@
   $ls__set = $row['sete'];
   $ls__out = $row['outu'];
   $ls__nov = $row['nov'];
+
+
+  // SQL Query To Fetch MEDIA FINAL DA CLASSE Information Of User
+  // $query = "SELECT year, nome_id, media FROM medias_1a WHERE identity=$identity"; // UNION ALL SELECT year, nome_id, media FROM medias_2a WHERE identity=$identity UNION ALL SELECT year, nome_id, media FROM medias_3a WHERE identity=$identity UNION ALL SELECT year, nome_id, media FROM medias_4a WHERE identity=$identity";
+  // $ses_sql_ = mysqli_query($conn, $query);
+  // @$row = mysqli_fetch_assoc($ses_sql);
+
+  // $ls__mediafinal_1a = $row['fev']
+  // $ls__mediafinal_2a =
+  // $ls__mediafinal_3a =
+  // $ls__mediafinal_4a =
+  // $ls__media_5a
+  // $ls__media_6a
+  // $ls__media_7a
 
   // SELECT port_1a.year FROM port_1a WHERE nome_id=246 UNION ALL SELECT port_2a.year FROM port_2a WHERE nome_id=246 UNION ALL SELECT port_3a.year FROM port_3a WHERE nome_id=246 UNION ALL SELECT port_4a.year FROM port_4a WHERE nome_id=246
 

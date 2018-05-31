@@ -34,7 +34,7 @@
     echo "done";
   }
 
-  $red_sql->close();
+
   $conn->close();
 
 ?>

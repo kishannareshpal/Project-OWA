@@ -75,6 +75,7 @@
 
       function loadtable(e){
         var sc = e.value;
+        document.getElementById('updatetableicon').removeAttribute('hidden');
         $("#ktable").html('<div style="margin: 40px" class="la-ball-fall la-dark"><div></div><div></div><div></div></div>');
 
         $.ajax({
@@ -111,6 +112,7 @@
                 classe: cl
               },
       				success: function(response){
+                $('#rmvmepls').html('<i class="minus square icon"></i>Sim, remover');
                 $("#"+ided).parent()[0].children[1].innerHTML='<i class="trash alternate outline icon"></i>';
                 $('#kktable').css({'pointer-events': ''});
                 $.suiAlert({
@@ -120,7 +122,8 @@
                   time: '5',
                   position: 'bottom-left',
                 });
-                loadtable(document.getElementById('classee'));
+                $('[id='+response+']').parent().remove();
+                // loadtable(document.getElementById('classee'));
 
       				}
       		  });
@@ -193,7 +196,7 @@
                   '<span class="ui checkbox"><input type="checkbox" id="rstCheck"><label>Resetar a senha</label></span>'
                 );
               } else {
-                $('#_cnfg').html('<span id="iscnfg" class="mdl-color-text--red"><strong>Não Configurado</strong></span>');
+                $('#_cnfg').html('<span id="iscnfg" class="mdl-color-text--red"><strong><i class="key icon"></i> Não Configurada</strong></span>');
               }
 
               $("#"+ided).parent()[0].children[2].innerHTML='<i class="pencil alternate yellow icon"></i>';
@@ -225,15 +228,16 @@
         <!-- Title -->
         <span><img src="../../../images/logo.png" width='50px'></span>
         <a href="../../../" style="text-decoration: none; color: inherit" class="mdl-layout-title">
-          <h3 style="font-family: 'Karma'; font-size: 16px; margin-bottom: 0px; text-shadow: 1px 1px rgba(43, 43, 43, 0.8); margin-top: 0px" class="mdl-layout-title"><strong>Escola Primária</strong></h3>
-          <span style="font-family: 'Karma'; font-size: 20px; text-shadow: 1px 1px rgba(43, 43, 43, 0.8);">
+          <span style="font-family: 'Karma'; font-size: 18px; text-shadow: 1px 1px rgba(43, 43, 43, 0.8);">
             <strong>One World Academy</strong>
           </span>
+          <h3 style="font-family: 'Karma'; font-size: 14px; margin-bottom: 0px; text-shadow: 1px 1px rgba(43, 43, 43, 0.8); margin-top: 0px" class="mdl-layout-title"><strong>Primary School</strong></h3>
+          <h5 style="font-family: 'Karma'; font-size: 14px; margin-bottom: 0px; margin-top: 0px" class="mdl-layout-title mdl-color-text--grey-500"><strong>Maxixe, Mozambique</strong></h5>
         </a>
         <!-- Add spacer, to align navigation to the right -->
         <div class="mdl-layout-spacer"></div>
       </div>
-      <h1 style="text-align: center"><strong>Console</strong></h1>
+      <h2 style="text-align: center"><strong>Administração</strong></h2>
     </header>
 
     <main class="mdl-layout__content">
@@ -241,7 +245,7 @@
 
       <div class="mdl-grid" style="margin-bottom: 350px;">
         <div style="margin-top: 30px; border-radius: 15px; padding: 20px" class="mdl-cell mdl-cell--3-col mdl-cell--12-col-phone mdl-cell--12-col-tablet mdl-color--grey-200">
-          <h2 class="mdl-color-text--grey-800" style="margin-bottom: 0px"><strong>Administração</strong></h2>
+          <h2 class="mdl-color-text--grey-800" style="margin-bottom: 0px"><strong>Meu Aluno</strong></h2>
           <div style="padding-top: 30px">
 
             <a href="#" style="text-transform: none; width: 100%; text-align: left" class="ui blue button">
@@ -286,15 +290,16 @@
 
           <div class="select hoverable">
             <select id="classee" onchange="loadtable(this)">
-                <option selected disabled>Classe    </option>
-                <option value="1a">       1a Classe </option>
-                <option value="2a">       2a Classe </option>
-                <option value="3a">       3a Classe </option>
-                <option value="4a">       4a Classe </option>
+                <option selected disabled> Classe      </option>
+                <option value="Pre">       Pré-Escolar </option>
+                <option value="1a">        1a Classe   </option>
+                <option value="2a">        2a Classe   </option>
+                <option value="3a">        3a Classe   </option>
+                <option value="4a">        4a Classe   </option>
             </select>
           </div>
 
-          <span data-inverted='' data-tooltip='Atualizar a tabela' data-position='right center' style="position: relative; top: 5px; left: 10px">
+          <span id='updatetableicon' hidden data-inverted='' data-tooltip='Atualizar a tabela' data-position='right center' style="position: relative; top: 5px; left: 10px">
             <i onclick="loadtable(document.getElementById('classee'))" style="cursor: pointer" class="refresh blue icon"></i>
           </span>
 
@@ -323,7 +328,7 @@
             </div>
             <div class="content">
               <div class="description">
-                Tem a certeza que deseja remover o(a) aluno(a) <span class="mdl-color-text--green-500" id='__alunoname'></span>?
+                Tem a certeza que deseja remover o(a) aluno(a) <span class="mdl-color-text--red-500" id='__alunoname'></span>?
               </div>
             </div>
             <div class="actions">

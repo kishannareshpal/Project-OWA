@@ -3,6 +3,16 @@
   <!DOCTYPE html>
   <html lang="en_US">
   <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-108236694-2"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+
+			gtag('config', 'UA-108236694-2');
+		</script>
+
     <!-- TODO: Add essential meta tags later -->
     <meta charset="UTF-8">
     <meta author="www.oneworldacademymz.com">

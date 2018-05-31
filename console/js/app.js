@@ -61,3 +61,11 @@ slectClasse.onchange = function() {
         slectDisc.options[slectDisc.options.length] = new Option(disciplina, classeObject['classes'][this.selectedOptions[0].value][disciplina])
     }
 };
+
+document.onreadystatechange = function () {
+    var state = document.readyState;
+
+    if (state == 'complete') {
+        document.getElementById("footer").removeAttribute("hidden", "");
+    }
+};

@@ -2,20 +2,11 @@
   <!DOCTYPE html>
   <html lang="en_US">
   <head>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-108236694-2"></script>
-		<script>
-			window.dataLayer = window.dataLayer || [];
-			function gtag(){dataLayer.push(arguments);}
-			gtag('js', new Date());
-
-			gtag('config', 'UA-108236694-2');
-		</script>
     <!-- TODO: Add essential meta tags later -->
     <meta charset="UTF-8">
     <meta author="www.oneworldacademymz.com">
     <meta co-author="Kishan Nareshpal Jadav">
-    <title>Get Involved - OWA</title>
+    <title>Privacy Policy - OWA</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="One World Academy">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -111,80 +102,60 @@
                   <a href='../about/        ' style="color: grey; margin: 5px; padding-top: 2px; border-radius: 7px; font-family: karma" class="mdl-button mdl-js-button mdl-color--green-50">About Us</a>
                   <a href='../ourteam/      ' style="color: grey ; margin: 5px; padding-top: 2px; border-radius: 7px; font-family: karma" class="mdl-button mdl-js-button mdl-color--green-50">Our Team</a>
                   <a href='                 ' style="color: grey ; margin: 5px; padding-top: 2px; border-radius: 7px; font-family: karma" class="mdl-button mdl-js-button mdl-color--green-50">Activities</a>
-                  <a href='#                ' style="color: white ; margin: 5px; padding-top: 2px; border-radius: 7px; font-family: karma" class="mdl-button mdl-js-button mdl-color--green-500">Get Involved</a>
+                  <a href='#                ' style="color: grey ; margin: 5px; padding-top: 2px; border-radius: 7px; font-family: karma" class="mdl-button mdl-js-button mdl-color--green-50">Get Involved</a>
                   <a href='../contacts/     ' style="color: grey ; margin: 5px; padding-top: 2px; border-radius: 7px; font-family: karma" class="mdl-button mdl-js-button mdl-color--green-50">Contacts</a>
                   <a href='../alunos/login/ ' style="color: grey ; margin: 5px; padding-top: 2px; border-radius: 7px; font-family: karma" class="mdl-button mdl-js-button mdl-color--orange-50"><i>Meu Aluno</i></a>
                 </div>
               </nav>
 
-              <h1 style="font-size: 40px; padding-left: 5px; text-shadow: 3px 3px rgba(180, 236, 192, 0.63);"><strong>How you can help</strong></h1>
+              <h1 style="font-size: 40px; padding-left: 5px; text-shadow: 3px 3px rgba(180, 236, 192, 0.63);"><strong>Privacy policy</strong></h1>
               <!-- <h1 style="margin-top: 5px; font-size: 28px; padding: 10px; padding-left: 20px; text-shadow: 3px 3px rgba(124, 145, 128, 0.63); border-radius: 5px 50px 5px 5px" class="bg-grad mdl-color-text--grey-700"><strong>_About Us</strong></h1> -->
               <!-- OUR VISION -->
               <div style="width: 100%; border-radius: 10px" class="mdl-card">
                 <div style="width: 100%" class="mdl-card__supporting-text">
                   <!-- actual page content -->
                     <div class="mdl-layout-spacer"></div>
-										<div style="margin: 5px">
-											<h4><strong>Ways you can get involved with One World Academy</strong></h4>
+										<div style="margin: 10px">
+                      <h3 style="margin-bottom: 0px"><strong>Introduction</strong></h3>
+                      <p style="margin-top: 0px">We collect information, such as the student's full name, when you provide it to us while using our website or volunteer it through other forms of communication. Our Privacy Policy explains how we use the information that we collect about you.</p>
 
-											<div style="margin-top: 10px" class="ui one stackable cards">
-												<div class="ui teal card">
-												  <div class="content">
-														<div style="margin-top: 20px" class="header">Donate & Support Us!</div>
-												    <div class="meta"><br></div>
-												    <div class="description" style="line-height: 1.8">
-															<img style="border-radius: 10px" width="100%" src="../images/mdim.png">
-															<br><br>
-															We are extremely grateful that the Texas based charity <i><strong>MDiM</strong></i> (<strong>Mozambique Development in Motion</strong>), allows us to use their <strong>501(c)(3)</strong> tax exempt for donors charity status to receive donations.
-															To donate simply click the Donate button bellow (or visit <a target="_blank" class="mdl-color-text--teal" href="https://www.mdim.org">https://www.mdim.org</a>) and follow instructions. Be sure to mention that you want the donation to go to One World Academy :)
-												    </div>
-												  </div>
-												  <div class="extra content">
-														<a href="https://www.mdim.org" class="ui labeled icon teal button">
-									            <i class="heart icon"></i>
-									            Donate
-									          </a>
-												  </div>
-												</div>
+                      <br>
 
-												<div class="ui yellow card">
-												  <div class="content">
-														<div style="margin-top: 20px" class="header">Join the Team!</div>
-												    <div class="meta"><br></div>
-												    <div class="description" style="line-height: 1.8">
-															<img style="border-radius: 10px" width="100%" src="../images/joinus.png">
-															<br><br>
-															We are looking for foreign based individuals and organizations to help us fundraise, develop projects and grow! Send us an <a href="mailto:oneworldacademymz@gmail.com"><u>Email</u></a> and let us know you want to get involved :)
-												    </div>
-												  </div>
-												  <div class="extra content">
-														<a href="mailto:oneworldacademymz@gmail.com" class="ui labeled icon yellow button">
-									            <i class="mail icon"></i>
-									            Join Us!
-															<br>
-									          </a>
-												  </div>
-												</div>
+                      <h3 style="margin-bottom: 0px"><strong>Use</strong></h3>
+                      <p style="margin-top: 0px; margin-bottom: 0px">The information we collect is used for the following reasons:</p>
+                      <ul style="margin-top: 0px">
+                        <li>Manage the student's account and settings</li>
+                        <li>Fulfill your requests made on our site</li>
+                      </ul>
 
-												<div class="ui green card">
-												  <div class="content">
-														<div style="margin-top: 20px" class="header">Volunteer Teach!</div>
-												    <div class="meta"><br></div>
-												    <div class="description" style="line-height: 1.8">
-															<img style="border-radius: 10px" width="100%" src="../images/volunteer.png">
-															<br><br>
-															Want to come to beautiful Mozambique and spend some time working with some fantastic kids? Send us an <a href="mailto:oneworldacademymz@gmail.com"><u>Email</u></a> and we can arrange you an awesome stay!
-												    </div>
-												  </div>
-												  <div class="extra content">
-														<a href="mailto:oneworldacademymz@gmail.com" class="ui labeled icon green button">
-									            <i class="mail icon"></i>
-									            Volunteer myself!
-									          </a>
-												  </div>
-												</div>
-											</div>
-										</div>
+                      <br>
+
+                      <h3 style="margin-bottom: 0px"><strong>Sharing</strong></h3>
+                      <p style="margin-top: 0px; margin-bottom: 0px">The information we collect is not shared with any other organizations, except in the following circumstances:</p>
+                      <ul style="margin-top: 0px">
+                        <li>One World Academy is acquired by, or merged with, another company.</li>
+                        <li>In order to comply with legal requirements, prevent or take action against suspected fraud or protect the safety of our users.</li>
+                        <li>In order to work with service providers, such as payment processors or credit agencies.</li>
+                        <li>There is a violation of our Terms of Service.</li>
+                      </ul>
+
+                      <br>
+
+                      <h3 style="margin-bottom: 0px"><strong>Cookies</strong></h3>
+                      <p style="margin-top: 0px; margin-bottom: 0px">We may assign your computer one or more cookies which collect information to facilitate access to our website and personalize your experience.</p>
+
+                      <br>
+
+                      <h3 style="margin-bottom: 0px"><strong>Changes</strong></h3>
+                      <p style="margin-top: 0px; margin-bottom: 0px">We may occasionally update our Privacy Policy. If significant changes are made, we will put a notice on the front page (Home) to inform you of an update.</p>
+
+                      <br>
+
+                      <h3 style="margin-bottom: 0px"><strong>How to contact us</strong></h3>
+                      <p style="margin-top: 0px; margin-bottom: 0px">If you have questions about our Privacy Policy contact us by email at: <a href="mailto:oneworldacademymz@gmail.com">oneworldacademymz@gmail.com</a> </p>
+
+
+                    </div>
                     <!-- <div class="mdl-layout-spacer"></div> -->
                   <!-- end of actual page content -->
                 </div>

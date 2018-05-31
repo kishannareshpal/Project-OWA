@@ -19,6 +19,15 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-108236694-2"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+
+			gtag('config', 'UA-108236694-2');
+		</script>
     <!-- TODO: Add essential meta tags later -->
     <meta charset="UTF-8">
     <meta author="www.oneworldacademymz.com">
@@ -48,12 +57,146 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cinzel+Decorative|Open+Sans|Karma">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="../../required/css/app.css">
+    <link rel="stylesheet" href="../../required/css/semantic-ui-alerts.min.css">
+    <noscript>OWA Aviso: Por favor abilite o uso do Javascript no seu navegador para poder usufruir da página <i>Meu Aluno</i> do site da One World Academy. Obrigado.</noscript>
     <!-- <style media="screen">
       * {
         font-family: 'Karma';
       }
     </style> -->
     <script src="//code.jquery.com/jquery-latest.min.js"></script>
+
+    <script>
+      var ided;
+
+      function clearsenhastuff(){
+        $('#_actualpass').val('');
+        $('#_newpass').val('');
+        $('#_newpassagain').val('');
+      }
+
+      function svme(){
+        $('#passnotice').html('');
+        document.getElementById('noticee').setAttribute("hidden", "");                            
+        
+        var actualpass     = $('#_actualpass').val();
+        var newpass        = $('#_newpass').val();
+        var newpassagain   = $('#_newpassagain').val();
+        
+        var prnome    = $('#_prnome').val();
+        var ulnome    = $('#_ulnome').val();
+        // var usrnome   = $('#_usrnamme').val();
+
+        $.ajax({
+  				url: "savemyinfo.php",
+  				type: "POST",
+          data: {
+            id: ided,
+            first_name: prnome,
+            last_name: ulnome,
+            actualpass: actualpass,
+            newpass: newpass,
+            newpassagain: newpassagain
+          },
+  				success: function(response){
+            $("#"+ided).html('<i class="cog icon"></i>Definições');
+            $('.blue.approve.button').html('<i class="save icon"></i>Guardar Mudanças');
+            $('#sairbuttonnn').css({'pointer-events': ''});
+
+            if (response === "INVALID") {
+              document.getElementById('noticee').setAttribute("hidden", "");                            
+              $('#passnotice').html('<span class="mdl-color-text--red-300">Oops, a senha actual digitada foi incorrecta.');
+            
+            } else if(response === "NOMATCH") {
+              document.getElementById('noticee').setAttribute("hidden", "");                            
+              $('#passnotice').html('<span class="mdl-color-text--red-300">Oops, as duas senhas novas digitadas não são iguais. Reescreva-os e tente novamente.');
+              
+            } else if(response === "CHANGED") {
+              $('#passnotice').html('');
+              $('#_actualpass').val('');              
+              $('#_newpass').val('');
+              $('#_newpassagain').val('');
+              document.getElementById('noticee').removeAttribute("hidden", "");
+              $('#noticee .list').html('<li span="color: green"><strong>Senha trocada com sucesso!</strong> Na proxima vez que se autenticares utilize a senha nova.</li>');
+            
+            } else if((response === "PROFILEERROR") || (response === "CHANGEDERROR")) {
+              document.getElementById('noticee').setAttribute("hidden", "");                            
+              $.suiAlert({
+                title: 'ERROR!',
+                description: 'Oops, ocorreu algum erro. Tente mais tarde ou contacte-nos.',
+                type: 'error',
+                time: '5',
+                position: 'bottom-left'
+              });
+            
+            } else if (response === "") {
+              document.getElementById('noticee').setAttribute("hidden", "");
+              $('#nommee').html("<strong>Nome: </strong>" + $('#_prnome').val() + " " + $('#_ulnome').val());
+              
+              $('#_actualpass').val('');       
+              $('#_newpass').val('');
+              $('#_newpassagain').val('');
+
+              $.suiAlert({
+                title: 'Sucesso!',
+                description: 'Informação do(a) Aluno(a) guardada com sucesso.',
+                type: 'success',
+                time: '5',
+                position: 'bottom-left'
+              });
+            }
+
+  				}
+  		  });
+      }
+
+      function plseditme(e){ // edit aluno's settings
+        ided = e.id;
+        
+        $("#"+ided).html('<i class="cog icon"></i><span class="spinner"><div class="bounce1 mdl-color--white"></div><div class="bounce2 mdl-color--white"></div><div class="bounce3 mdl-color--white"></div></span>');
+        $('#sairbuttonnn').css({'pointer-events': 'none'});
+
+        $.ajax({
+  				url: "loadmyinfo.php",
+  				type: "GET",
+          data: {
+            id: ided
+          },
+          dataType: 'json',
+  				success: function(response){
+            if (response === "") {
+              // oops. bad fuckery happened here
+              alert('Error: 909'); // no user found i guess
+              $("#"+ided).html('<i class="cog icon"></i>Definições');
+
+            } else {
+              $('#_prnome').val(response[0]['first_name']);
+              $('#_ulnome').val(response[0]['last_name']);
+
+              $("#"+ided).html('<i class="cog icon"></i>Definições');
+              $('#sairbuttonnn').css({'pointer-events': ''});
+              
+              // Clear previous operations
+              $('#passnotice').html('');
+              $('#_actualpass').val('');              
+              $('#_newpass').val('');
+              $('#_newpassagain').val('');
+              document.getElementById('noticee').setAttribute("hidden", "");
+
+              $('#editmodal').modal({
+                closable  : false,
+                onApprove : function() {
+                  $('.blue.approve.button').html('<i class="save icon"></i><span class="spinner"><div class="bounce1 mdl-color--white"></div><div class="bounce2 mdl-color--white"></div><div class="bounce3 mdl-color--white"></div></span>');
+                  $('#sairbuttonnn').css({'pointer-events': 'none'});
+                  svme();
+                  return false;
+                }
+              }).modal('show');
+            }
+  				}
+  		  });
+      }
+    </script>
   </head>
 
 <body class="mdl-color--yellow-100">
@@ -95,19 +238,25 @@
         <div style="border-radius: 15px; margin-top: 20px" class="mdl-cell mdl-cell--12-col mdl-cell--12-col-phone mdl-cell--12-col-tablet mdl-color--white hoverable">
             <div style="padding: 40px" class="">
               <h2 class="mdl-color-text--grey-400"><strong>Informação:</strong></h2>
-              <h4 class="mdl-color-text--grey-800" style="margin-bottom: 0px"><strong>Nome: </strong><?php echo $ls__first_name." ".$ls__last_name ?></h4>
+              <h4 class="mdl-color-text--grey-800" id='nommee' style="margin-bottom: 0px"><strong>Nome: </strong><?php echo $ls__first_name." ".$ls__last_name ?></h4>
               <h4 class="mdl-color-text--grey-200;" style="margin-top: 5px"><strong>Classe: </strong><?php echo $ls__grade ?></h5>
-              <a href="../logout.php" style="margin-top: 10px;" class="ui labeled icon mdl-color-text--white mdl-color--red-300 button">
+              <a href="../logout.php" id='sairbuttonnn' style="margin-top: 10px;" class="ui labeled icon mdl-color-text--white mdl-color--red-300 button">
                 <i class="log out icon"></i>
                 Sair da conta
+              </a>
+
+              <a onclick="plseditme(this)" id="<?php echo $ls__id ?>" style="margin-top: 8px;" class="ui labeled icon mdl-color-text--white mdl-color--grey-700 button">
+                <i class="cog icon"></i>
+                Definições
               </a>
             </div>
         </div>
       </div>
+      
 
 
       <div class="mdl-grid" style="margin-bottom: 350px;">
-        <div style="margin-top: 30px; border-radius: 15px; padding: 20px; overflow-x: auto" class="mdl-cell mdl-cell--4-col mdl-cell--12-col-phone mdl-cell--12-col-tablet mdl-color--white hoverable">
+        <div style="margin-top: 30px; border-radius: 15px; padding: 20px; overflow-x: auto" class="mdl-cell <?php if ($ls__grade !== 'Pré-Escolar'){echo 'mdl-cell--4-col';} else {echo 'mdl-cell--12-col';} ?> mdl-cell--4-col mdl-cell--12-col-phone mdl-cell--12-col-tablet mdl-color--white hoverable">
           <h2 class="mdl-color-text--grey-400" style="margin-bottom: 0px"><strong>Mensalidade</strong></h2>
           <h4 class="mdl-color-text--grey-300" style="margin-top: 0px"><strong>Ano: <?php echo date('Y') ?></strong></h4>
           <table style="border-width: 0px" class="ui unstackable selectable compact table mdl-color--grey-200 hoverable">
@@ -236,10 +385,11 @@
 
 
         <!--  opacity: .3; pointer-events: none -->
-        <div style="margin-top: 30px; padding: 20px; border-radius: 15px; overflow-x: auto" class="mdl-cell mdl-cell--8-col mdl-cell--12-col-phone mdl-cell--12-col-tablet mdl-color--grey-50 hoverable">
+        <?php if ($ls__grade !== "Pré-Escolar"): ?>
+          <div style="margin-top: 30px; padding: 20px; border-radius: 15px; overflow-x: auto" class="mdl-cell mdl-cell--8-col mdl-cell--12-col-phone mdl-cell--12-col-tablet mdl-color--grey-50">
           <h2 class="mdl-color-text--grey-400"><strong>Pauta</strong></h2>
-
-          <div class="select hoverable">
+          
+          <div class="select">
             <select onchange="spleasechange(this)" id="ano_st">
               <optgroup label="Pauta do Ano:">
                 <?php while ($row_red_ = mysqli_fetch_assoc($red_sql_)) {?>
@@ -252,7 +402,7 @@
 
                   $.ajax({
                     url: "../notas_st.php",
-                    type: "POST",
+                    type: "GET",
                     data: 'sa='+sa,
                     success: function(response){
                       $("#ktable").html(response);
@@ -263,21 +413,88 @@
             </select>
           </div>
 
-
-
           <div style="margin-top: 20px" id="ktable">
-            <div class="la-ball-fall la-light">
+            <div class="la-ball-fall la-dark">
                 <div></div>
                 <div></div>
                 <div></div>
             </div>
           </div>
-          <h6 id="k-media" style="text-align: right; position: relative; right: 10px" class="mdl-color-text--grey-500"><strong>Méd. final da 1a Classe: <?php if(!empty($mediafinal)){echo $mediafinal;} else {echo "___";}; ?></strong></h6>
-
-
-
 
         </div>
+        <?php endif; ?>
+        
+        <div id="editmodal" class="ui tiny modal">
+            <div class="header"><i class="cog blue icon"></i>&nbsp Definições</div>
+            <div class="scrolling content">
+              <!-- Operation Notices -->
+              <div style='font-size: 12px' hidden id='noticee' class="ui green message">
+                <ul class="list">
+                  <!-- <li>SUCESSO: Password foi trocado com sucesso! Da próxima vez que se autenticares por favor utilize o novo password.</li> -->
+                </ul>
+              </div>
+
+              <!-- Change aluno information -->
+              <div style='width: 100%' class="ui styled accordion">
+                <div class="title mdl-color--grey-50">
+                  <i class="dropdown icon"></i>
+                  Dados do Aluno
+                </div>
+                <div class="content">
+                  <p>Primeiro Nome:
+                    <span class="ui icon input fluid">
+                      <input id="_prnome" type="text" autocomplete="name" placeholder="primeiro nome...">
+                      <i class="edit icon"></i>
+                    </span>
+                  </p>
+
+                  <p>Último Nome (Apelido):
+                    <span class="ui icon input fluid">
+                      <input id="_ulnome" type="text" autocomplete="name" placeholder="apelido...">
+                      <i class="edit icon"></i>
+                    </span>
+                  </p>
+                </div>
+                
+                <!-- Change password -->
+                <div onclick='clearsenhastuff()' class="title mdl-color--grey-50">
+                  <i class="dropdown icon"></i>
+                  Trocar a Senha
+                </div>
+                <div class="content">
+                  <p id='passnotice'></p>
+                  <p>Senha Actual:
+                    <span class="ui input fluid">
+                      <input id="_actualpass" type="password" placeholder="senha actual...">
+                    </span>
+                  </p>
+
+                  <p>Nova senha:
+                    <span class="ui input fluid">
+                      <input id="_newpass" type="password" autocomplete="password" placeholder="nova senha...">
+                    </span>
+                  </p>
+
+                  <p>Confirmar Nova senha:
+                    <span class="ui input fluid">
+                      <input id="_newpassagain" type="password" autocomplete="password" placeholder="nova senha (mais uma vez)...">
+                    </span>
+                  </p>
+                </div>
+              </div> <!-- end of accordion -->
+
+            </div> <!-- end of modal content -->
+
+            <div class="actions">
+              <div class="ui grey deny button">
+                Fechar
+              </div>
+              <div class="ui labeled icon blue approve button">
+                <i class="save icon"></i>Guardar Mudanças
+              </div>
+            </div> <!-- end of modal actions -->
+
+          </div>
 
       </div>
 
@@ -321,9 +538,21 @@
 
     <!-- Bootstrap JS -->
     <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.js"></script>
     <script src="../../required/js/material-components-web/dist/material-components-web.min.js"></script>
     <script src="../years.js"></script>
     <script src="../../required/js/app.js"></script>
+    <script src="../../required/js/semantic-ui-alerts.min.js"></script>
+    <script>
+      $(document).ready(function(){
+
+        $('.accordion').accordion({
+          selector: {
+            trigger: '.title'
+          }
+        });
+      });
+    </script>
 
 
   </body>

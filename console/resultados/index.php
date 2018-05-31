@@ -55,7 +55,7 @@
   		}
 
   		function saveToDatabase(editableObj, column, id) {
-        var sd = document.getElementById('disciplinaa').value;
+        var sa = document.getElementById('anoo').value;
         var sc = document.getElementById('classee').value;
         var innedit;
 
@@ -69,7 +69,7 @@
         $.ajax({
   				url: "saveedit.php",
   				type: "POST",
-  				data:'col='+column + '&val='+innedit + '&id='+id + '&sd='+sd + '&sc='+sc,
+  				data:'col='+column + '&val='+innedit + '&id='+id + '&sa='+sa + '&sc='+sc,
   				success: function(data){
             // console.log(data);
             if (data === "done") {
@@ -119,14 +119,14 @@
       }
 
       function loadtable(e){
-        var sd = e.value;
-        var sc = document.getElementById('classee').value;
+        var sa = document.getElementById('anoo').value;
+        var sc = e.value;
         $("#ktable").html('<div style="margin: 40px" class="la-ball-fall la-dark"><div></div><div></div><div></div></div>');
 
         $.ajax({
-  				url: "addnotas.php",
+  				url: "loadtable.php",
   				type: "POST",
-          data: 'sd='+sd+'&sc='+sc,
+          data: 'sa='+sa+'&sc='+sc,
   				success: function(response){
             if (response === "") {
               $("#ktable").html("<div style='margin: 40px' class='mdl-color-text--red-200'>Nenhum aluno foi encontrado.</div>");
@@ -152,7 +152,7 @@
         <div class="mdl-layout-spacer"></div>
         <!-- Title -->
         <span><img src="../../images/logo.png" width='50px'></span>
-        <a href="../" style="text-decoration: none; color: inherit" class="mdl-layout-title">
+        <a href="../../" style="text-decoration: none; color: inherit" class="mdl-layout-title">
           <span style="font-family: 'Karma'; font-size: 18px; text-shadow: 1px 1px rgba(43, 43, 43, 0.8);">
             <strong>One World Academy</strong>
           </span>
@@ -187,7 +187,7 @@
           <div class="ui divider"></div>
 
           <div>
-            <a href="#" style="text-transform: none; width: 100%; text-align: left" class="ui blue button">
+            <a href="../pautas/" style="text-transform: none; width: 100%; text-align: left" class="ui mdl-color--blue-200 mdl-color-text--white button">
               <i class="ui file alternate white icon"></i>
               Pautas
             </a>
@@ -197,7 +197,7 @@
                 <i class="ui long arrow alternate right black icon"></i>
               </button>
 
-              <a href="../resultados/" style="margin-right: 0px; width: 80%; float: right; text-transform: none; margin-top: 10px; text-align: left" class="ui basic button">
+              <a href="#" style="margin-right: 0px; width: 80%; float: right; text-transform: none; margin-top: 10px; text-align: left" class="ui blue button">
                 <i class="ui file alternate outline white icon"></i>
                 Resultados
               </a>
@@ -217,11 +217,23 @@
         <!--  opacity: .3; pointer-events: none -->
         <!-- EDITAR NOTAS -->
         <div style="margin-top: 30px; padding: 20px; border-radius: 15px; overflow-x: auto" class="mdl-cell mdl-cell--9-col mdl-cell--12-col-phone mdl-cell--12-col-tablet mdl-color--grey-300">
-          <h2 class="mdl-color-text--grey-500" style="margin-bottom: 0px"><strong>Pautas</strong></h2>
-          <h4 class="mdl-color-text--grey-700" style="margin-top: 0px"><strong>Ano Lectivo de <?php echo date("Y") ?></strong></h4>
+          <h2 class="mdl-color-text--grey-500" style="margin-bottom: 0px"><strong>Resultados</strong></h2>
 
           <div class="select hoverable">
-            <select id="classee">
+            <select id="anoo">
+                <option selected disabled>Ano</option>
+                <?php for ($i=2017; $i < date('Y'); $i++) { ?>
+                  <option <?php if($i+1 == date('Y')){?>selected<?php };?> value="<?php echo $i+1 ?>"><?php echo $i+1 ?></option>
+                <?php }; ?>
+            </select>
+
+            <!-- <script type="text/javascript">
+              loadtable(document.getElementById('anoo'));
+            </script> -->
+          </div>
+
+          <div class="select hoverable">
+            <select onchange="loadtable(this)" id="classee">
                 <option selected disabled>Classe    </option>
                 <option value="1a">       1a Classe </option>
                 <option value="2a">       2a Classe </option>
@@ -230,31 +242,17 @@
             </select>
           </div>
 
-          <div class="select hoverable">
-            <select id="disciplinaa" onchange="loadtable(this)">
-                <option selected disabled>    Disciplina      </option>
-                <!-- <option value="port_">   Português       </option>
-                <option value="mat_">         Matemática      </option>
-                <option value="ing_">         Inglês          </option>
-                <option value="artesvisuais_">Artes Visuais   </option>
-                <option value="musica_">      Música          </option>
-                <option value="edf_">         Educação Física </option>
-                <option value="danca_">       Dança           </option> -->
-            </select>
-          </div>
 
-          <!-- <h5>Nota: Para apagar uma nota, coloque " <strong>-</strong> ".</h5> -->
           <table style="overflow-x: scroll" class="ui celled selectable unstackable structured table">
             <thead>
               <tr>
-                <th class="center aligned eight wide" rowspan="2">Nome      </th>
-                <th class="center aligned three wide" colspan="3">Média Trimestral</th>
-                <th class="center aligned one wide" rowspan="2">Média<br>Anual     </th>
+                <th class="center aligned eight wide" rowspan="2">Nome</th>
+                <th class="center aligned two wide" colspan="2">Nota</th>
+                <th class="center aligned two wide" rowspan="2">Média<br>Final</th>
               </tr>
               <tr>
-                <th class="center aligned">1º</th>
-                <th class="center aligned">2º</th>
-                <th class="center aligned">3º</th>
+                <th class="center aligned">Final</th>
+                <th class="center aligned">Exame</th>
               </tr>
             </thead>
 
@@ -311,6 +309,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.js"></script>
     <script src="../../required/js/material-components-web/dist/material-components-web.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tabulator/3.4.4/js/tabulator.min.js"></script>
-    <script type="text/javascript" src="../js/app.js"></script>
+    <!-- <script type="text/javascript" src="../js/app.js"></script> -->
   </body>
 </html>

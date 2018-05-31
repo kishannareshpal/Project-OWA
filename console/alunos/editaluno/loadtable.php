@@ -1,11 +1,18 @@
 <?php
 
-  $scRaw=$_GET['sc'];
-  $sc = $scRaw." Classe";
+  $classeRaw=$_GET['sc'];
+
+  if ($classeRaw !== "Pre") {
+    $sc = $classeRaw.' Classe'; // like 1a Classe, 2a Classe, 3a Cl...
+  } else {
+    $sc = "Pré-Escolar";
+  }
+
+  var_dump($sc);
 
   $conn = mysqli_connect("oneworldacademymz.com", "oneworv0_admin", "admin", "oneworv0_students") or die ('I cannot connect to the database.');
 
-  $sql = "SELECT CONCAT(p.first_name, ' ', p.last_name) as fullname, p.id, p.first_name, p.last_name, p.username, p.password, p.grade FROM profiles as p WHERE p.grade='".$sc."'";
+  $sql = "SELECT CONCAT(p.first_name, ' ', p.last_name) as fullname, p.id, p.first_name, p.last_name, p.username, p.password, p.grade FROM profiles as p WHERE p.grade='".$sc."' ORDER BY fullname";
   $qe = mysqli_query($conn, $sql);
 
   // var_dump($row['prim_trim']);
@@ -19,6 +26,5 @@
 <?php }
 
   # Close connection when finished
-  $qe->close();
   $conn->close();
  ?>

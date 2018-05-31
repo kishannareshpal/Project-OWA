@@ -11,6 +11,16 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-108236694-2"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+
+			gtag('config', 'UA-108236694-2');
+		</script>
+    
     <!-- TODO: Add essential meta tags later -->
     <meta charset="UTF-8">
     <meta author="www.oneworldacademymz.com">
@@ -19,7 +29,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="One World Academy">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <!-- Add to homescreen for Chrome on Android -->
     <meta name="mobile-web-app-capable" content="yes">
     <link rel="icon" sizes="192x192" href="../../images/android-desktop.png">
@@ -78,6 +87,34 @@
               <h2 class="mdl-color-text--grey-800"><strong>Registar</strong></h2>
               <div class="mdl-layout-spacer"></div>
             </div>
+            <?php if ($error_reg !== null): ?>
+              <div id="err" class="ui red mini message">
+                <!-- <i class="close icon"></i> -->
+                  <div class="header">
+                    Oops,
+                  </div>
+                  <p><?php echo $error_reg; ?>
+                </p>
+              </div>
+            <?php endif; $error_reg = null;?>
+
+            <?php if (($success !== null) && ($error_reg == null)): ?>
+              <div id="suc" class="ui blue mini message">
+                <!-- <i class="close icon"></i> -->
+                  <div class="header">
+                    Operação Efectuada com sucesso.
+                  </div>
+                  <p>Aluno registado.</p>
+                  <p>Redirecionando-lhe à página de <a href="https://wwww.oneworldacademymz.com/alunos/login">autenticação</a> em 5segundos.</p>
+                </p>
+              </div>
+
+              <script type="text/javascript">
+                setTimeout(function () {
+                  window.location = "../login/";
+                }, 5000);
+              </script>
+            <?php endif; $success = null?>
             <form action="" method="post" class="ui form" style="width: 100%">
               <div class="required field">
                 <label style="color: grey; margin-bottom: 1px; font-weight: 600;">Username</label>
@@ -96,34 +133,6 @@
               <div style="text-align: right">
                 <button class="ui blue button" name="submit_reg" type="submit">Registar</button>
               </div>
-              <?php if ($error_reg !== null): ?>
-                <div id="err" class="ui red mini message">
-                  <!-- <i class="close icon"></i> -->
-                    <div class="header">
-                      Oops,
-                    </div>
-                    <p><?php echo $error_reg; ?>
-                  </p>
-                </div>
-              <?php endif; $error_reg = null;?>
-
-              <?php if (($success !== null) && ($error_reg == null)): ?>
-                <div id="suc" class="ui blue mini message">
-                  <!-- <i class="close icon"></i> -->
-                    <div class="header">
-                      Operação Efectuada com sucesso.
-                    </div>
-                    <p>Aluno registado.</p>
-                    <p>Redirecionando-lhe à página de <a href="https://wwww.oneworldacademymz.com/alunos/login">autenticação</a> em 5segundos.</p>
-                  </p>
-                </div>
-
-                <script type="text/javascript">
-                  setTimeout(function () {
-                    window.location = "../login/";
-                  }, 5000);
-                </script>
-              <?php endif; $success = null?>
             </form>
           </div>
         </div>
@@ -145,24 +154,7 @@
           <p style="margin-top: 0px; font-size: 14px">Email: <a target="_blank" href="mailto:oneworldacademymz@gmail.com">oneworldacademymz@gmail.com</a></a>
           <h6 style="font-size: 14px; font-family: karma"><strong>Copyright © <script>document.write((new Date()).getFullYear())</script> <span class="mdl-color-text--green-300">One World Academy Primary School</span></strong></h6>
 
-          <!-- <ul class="mdl-mega-footer__link-list">
-            <li><a href="#">About</a></li>
-            <li><a href="#">Terms</a></li>
-            <li><a href="#">Partners</a></li>
-            <li><a href="#">Updates</a></li>
-          </ul> -->
         <div class="mdl-layout-spacer"></div>
-
-          <!-- <div><script>document.write((new Date()).getFullYear())</script> © One World Academy Elementary School</div>
-          <p>Maxixe, Mozambique</p>
-          <div>All rights reserved.</div>
-          <p class="mdl-color-text--red-400">Notice: This web app is under development. Build_nr. A<script>document.write(localStorage.getItem("app_version_owa"))</script></p>
-          <div class="ui buttons">
-            <button class="ui disabled button">Change to</button>
-            <button class="ui icon button">
-              Portuguese
-            </button>
-          </div> -->
         </div>
       </footer>
     </main>

@@ -372,29 +372,30 @@
         <div class="mdl-layout-spacer"></div>
         <!-- Title -->
         <span><img src="../../images/logo.png" width='50px'></span>
-        <a href="../../" style="text-decoration: none; color: inherit;; color: inherit;; color: inherit" class="mdl-layout-title">
-          <h3 style="font-family: 'Karma'; font-size: 16px; margin-bottom: 0px; text-shadow: 1px 1px rgba(43, 43, 43, 0.8); margin-top: 0px" class="mdl-layout-title"><strong>Escola Primária</strong></h3>
-          <span style="font-family: 'Karma'; font-size: 20px; text-shadow: 1px 1px rgba(43, 43, 43, 0.8);">
+        <a href="../../" style="text-decoration: none; color: inherit" class="mdl-layout-title">
+          <span style="font-family: 'Karma'; font-size: 18px; text-shadow: 1px 1px rgba(43, 43, 43, 0.8);">
             <strong>One World Academy</strong>
           </span>
+          <h3 style="font-family: 'Karma'; font-size: 14px; margin-bottom: 0px; text-shadow: 1px 1px rgba(43, 43, 43, 0.8); margin-top: 0px" class="mdl-layout-title"><strong>Primary School</strong></h3>
+          <h5 style="font-family: 'Karma'; font-size: 14px; margin-bottom: 0px; margin-top: 0px" class="mdl-layout-title mdl-color-text--grey-500"><strong>Maxixe, Mozambique</strong></h5>
         </a>
         <!-- Add spacer, to align navigation to the right -->
         <div class="mdl-layout-spacer"></div>
       </div>
-      <h1 style="text-align: center"><strong>Console</strong></h1>
+      <h2 style="text-align: center"><strong>Administração</strong></h2>
     </header>
 
     <main class="mdl-layout__content">
       <!-- page content -->
       <div class="mdl-grid" style="margin-bottom: 350px;">
         <div style="margin-top: 30px; border-radius: 15px; padding: 20px" class="mdl-cell mdl-cell--3-col mdl-cell--12-col-phone mdl-cell--12-col-tablet mdl-color--grey-200">
-          <h2 class="mdl-color-text--grey-800" style="margin-bottom: 0px"><strong>Administração</strong></h2>
+          <h2 class="mdl-color-text--grey-800" style="margin-bottom: 0px"><strong>Meu Aluno</strong></h2>
           <div style="padding-top: 30px">
 
-            <!-- <a href="../alunos/editaluno/" style="text-transform: none; width: 100%; text-align: left" class="ui basic button">
+            <a href="../alunos/editaluno/" style="text-transform: none; width: 100%; text-align: left" class="ui basic button">
               <i class="ui edit outline black icon"></i>
               Alunos registados
-            </a> -->
+            </a>
 
             <a href="../alunos/addaluno/" style="text-transform: none; width: 100%; margin-top: 10px; text-align: left" class="ui basic button">
               <i class="ui add user black icon"></i>
@@ -527,6 +528,14 @@
     <script src="../../required/js/material-components-web/dist/material-components-web.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tabulator/3.4.4/js/tabulator.min.js"></script>
     <!-- <script type="text/javascript" src="js/app.js"></script> -->
+    <script type="text/javascript">
+      document.onreadystatechange = function () {
+          var state = document.readyState;
 
+          if (state == 'complete') {
+              document.getElementById("footer").removeAttribute("hidden", "");
+          }
+      };
+    </script>
   </body>
 </html>

@@ -181,7 +181,7 @@
                 <a href='../about/           ' style="color: grey ; margin: 5px; padding-top: 2px; border-radius: 7px; font-family: karma" class="mdl-button mdl-js-button mdl-color--green-50">Sobre nós</a>
                 <a href='../ourteam/         ' style="color: grey ; margin: 5px; padding-top: 2px; border-radius: 7px; font-family: karma" class="mdl-button mdl-js-button mdl-color--green-50">A Equipe</a>
                 <a href='  							  ' style="color: grey ; margin: 5px; padding-top: 2px; border-radius: 7px; font-family: karma" class="mdl-button mdl-js-button mdl-color--green-50">Actividades</a>
-                <a href='../getinvolved/  ' style="color: grey ; margin: 5px; padding-top: 2px; border-radius: 7px; font-family: karma" class="mdl-button mdl-js-button mdl-color--green-50">Envolver-se</a>
+                <!-- <a href='../getinvolved/  ' style="color: grey ; margin: 5px; padding-top: 2px; border-radius: 7px; font-family: karma" class="mdl-button mdl-js-button mdl-color-green-50">Envolver-se</a> -->
                 <a href='../contacts/        ' style="color: grey ; margin: 5px; padding-top: 2px; border-radius: 7px; font-family: karma" class="mdl-button mdl-js-button mdl-color--green-50">Contactos</a>
                 <a href='../alunos/login/    ' style="color: grey ; margin: 5px; padding-top: 2px; border-radius: 7px; font-family: karma" class="mdl-button mdl-js-button mdl-color--orange-50"><i>Meu Aluno</i></a>
               </div>
@@ -289,7 +289,7 @@
             <p style="margin-bottom: 0px; cursor: none; font-size: 14px">1 Bairro Eduardo Mondlane</p>
             <p style="margin-top: 0px; margin-bottom: 0px; font-size: 14px">Maxixe, Moçambique</p>
             <!-- <p style="margin-top: 0px">Phone: </p> -->
-            <p style="margin-top: 0px; margin-bottom: 0px; font-size: 14px">Celular: <a href="tel:+258843549804">+258 84-354-9804</a></p>
+            <p style="margin-top: 0px; margin-bottom: 0px; font-size: 14px">Celular: <a href="tel:+258843549804">+258 843549804</a></p>
             <p style="margin-top: 0px; font-size: 14px">Email: <a target="_blank" href="mailto:oneworldacademymz@gmail.com">oneworldacademymz@gmail.com</a></a>
             <h6 style="font-size: 14px; font-family: karma"><strong>Copyright © <script>document.write((new Date()).getFullYear())</script> <span class="mdl-color-text--green-300">One World Academy Primary School</span></strong></h6>
 
