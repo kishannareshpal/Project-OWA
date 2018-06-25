@@ -1,18 +1,18 @@
 <?php
 
-  include('../session.php'); // Includes session Script
+  // include('../session.php'); // Includes session Script
 
-  if ($_COOKIE['lu'] === "owa") {
-    header("location: ../../console/"); // Redirect To Profile Page
-  } else if ($_COOKIE['lu'] === "professor") {
-    header("location: ../../console/professor/"); // Redirect To Profile Page
-  }
+  // if ($_COOKIE['lu'] === "owa") {
+  //   header("location: ../../console/"); // Redirect To Profile Page
+  // } else if ($_COOKIE['lu'] === "professor") {
+  //   header("location: ../../console/professor/"); // Redirect To Profile Page
+  // }
 
-  if(!isset($_COOKIE['lu'])){
-    @header("location: ../../"); // Redirecting To Profile Page
-    print_r("Usuário não autenticado. Por favor volte e autentique-se.");
-    die();
-  }
+  // if(!isset($_COOKIE['lu'])){
+  //   @header("location: ../../"); // Redirecting To Profile Page
+  //   print_r("Usuário não autenticado. Por favor volte e autentique-se.");
+  //   die();
+  // }
 ?>
 
 
@@ -77,12 +77,12 @@
 
       function svme(){
         $('#passnotice').html('');
-        document.getElementById('noticee').setAttribute("hidden", "");
-
+        document.getElementById('noticee').setAttribute("hidden", "");                            
+        
         var actualpass     = $('#_actualpass').val();
         var newpass        = $('#_newpass').val();
         var newpassagain   = $('#_newpassagain').val();
-
+        
         var prnome    = $('#_prnome').val();
         var ulnome    = $('#_ulnome').val();
         // var usrnome   = $('#_usrnamme').val();
@@ -104,23 +104,23 @@
             $('#sairbuttonnn').css({'pointer-events': ''});
 
             if (response === "INVALID") {
-              document.getElementById('noticee').setAttribute("hidden", "");
+              document.getElementById('noticee').setAttribute("hidden", "");                            
               $('#passnotice').html('<span class="mdl-color-text--red-300">Oops, a senha actual digitada foi incorrecta.');
-
+            
             } else if(response === "NOMATCH") {
-              document.getElementById('noticee').setAttribute("hidden", "");
+              document.getElementById('noticee').setAttribute("hidden", "");                            
               $('#passnotice').html('<span class="mdl-color-text--red-300">Oops, as duas senhas novas digitadas não são iguais. Reescreva-os e tente novamente.');
-
+              
             } else if(response === "CHANGED") {
               $('#passnotice').html('');
-              $('#_actualpass').val('');
+              $('#_actualpass').val('');              
               $('#_newpass').val('');
               $('#_newpassagain').val('');
               document.getElementById('noticee').removeAttribute("hidden", "");
               $('#noticee .list').html('<li span="color: green"><strong>Senha trocada com sucesso!</strong> Na proxima vez que se autenticares utilize a senha nova.</li>');
-
+            
             } else if((response === "PROFILEERROR") || (response === "CHANGEDERROR")) {
-              document.getElementById('noticee').setAttribute("hidden", "");
+              document.getElementById('noticee').setAttribute("hidden", "");                            
               $.suiAlert({
                 title: 'ERROR!',
                 description: 'Oops, ocorreu algum erro. Tente mais tarde ou contacte-nos.',
@@ -128,12 +128,12 @@
                 time: '5',
                 position: 'bottom-left'
               });
-
+            
             } else if (response === "") {
               document.getElementById('noticee').setAttribute("hidden", "");
               $('#nommee').html("<strong>Nome: </strong>" + $('#_prnome').val() + " " + $('#_ulnome').val());
-
-              $('#_actualpass').val('');
+              
+              $('#_actualpass').val('');       
               $('#_newpass').val('');
               $('#_newpassagain').val('');
 
@@ -152,7 +152,7 @@
 
       function plseditme(e){ // edit aluno's settings
         ided = e.id;
-
+        
         $("#"+ided).html('<i class="cog icon"></i><span class="spinner"><div class="bounce1 mdl-color--white"></div><div class="bounce2 mdl-color--white"></div><div class="bounce3 mdl-color--white"></div></span>');
         $('#sairbuttonnn').css({'pointer-events': 'none'});
 
@@ -175,10 +175,10 @@
 
               $("#"+ided).html('<i class="cog icon"></i>Definições');
               $('#sairbuttonnn').css({'pointer-events': ''});
-
+              
               // Clear previous operations
               $('#passnotice').html('');
-              $('#_actualpass').val('');
+              $('#_actualpass').val('');              
               $('#_newpass').val('');
               $('#_newpassagain').val('');
               document.getElementById('noticee').setAttribute("hidden", "");
@@ -252,7 +252,7 @@
             </div>
         </div>
       </div>
-
+      
 
 
       <div class="mdl-grid" style="margin-bottom: 350px;">
@@ -388,7 +388,7 @@
         <?php if ($ls__grade !== "Pré-Escolar"): ?>
           <div style="margin-top: 30px; padding: 20px; border-radius: 15px; overflow-x: auto" class="mdl-cell mdl-cell--8-col mdl-cell--12-col-phone mdl-cell--12-col-tablet mdl-color--grey-50">
           <h2 class="mdl-color-text--grey-400"><strong>Pauta</strong></h2>
-
+          
           <div class="select">
             <select onchange="spleasechange(this)" id="ano_st">
               <optgroup label="Pauta do Ano:">
@@ -423,7 +423,7 @@
 
         </div>
         <?php endif; ?>
-
+        
         <div id="editmodal" class="ui tiny modal">
             <div class="header"><i class="cog blue icon"></i>&nbsp Definições</div>
             <div class="scrolling content">
@@ -455,7 +455,7 @@
                     </span>
                   </p>
                 </div>
-
+                
                 <!-- Change password -->
                 <div onclick='clearsenhastuff()' class="title mdl-color--grey-50">
                   <i class="dropdown icon"></i>

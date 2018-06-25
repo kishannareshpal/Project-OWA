@@ -6,17 +6,16 @@ $sa=$_GET['sa'];
 if ($ls__grade == "1a Classe") {
 
   # code...
-  $query_1a = "SELECT prim_trim, seg_trim, ter_trim, notafinal, 'Português' FROM port_1a WHERE nome_id=$ls__id AND year=$sa UNION ALL SELECT prim_trim, seg_trim, ter_trim, notafinal, 'Matemática' FROM mat_1a WHERE nome_id=$ls__id AND year=$sa UNION ALL SELECT prim_trim, seg_trim, ter_trim, notafinal, 'Inglês' FROM ing_1a WHERE nome_id=$ls__id AND year=$sa UNION ALL SELECT prim_trim, seg_trim, ter_trim, notafinal, 'Artes Visuais' FROM artesvisuais_1a WHERE nome_id=$ls__id AND year=$sa UNION ALL SELECT prim_trim, seg_trim, ter_trim, notafinal, 'Música' FROM musica_1a WHERE nome_id=$ls__id AND year=$sa UNION ALL SELECT prim_trim, seg_trim, ter_trim, notafinal, 'Educação Física' FROM edf_1a WHERE nome_id=$ls__id AND year=$sa UNION ALL SELECT prim_trim, seg_trim, ter_trim, notafinal, 'Dança' FROM danca_1a WHERE nome_id=$ls__id AND year=$sa
-  ";
+  $query_1a = "SELECT prim_trim, seg_trim, ter_trim, notafinal, 'Português' FROM port_1a WHERE nome_id=$ls__id AND year=$sa UNION ALL SELECT prim_trim, seg_trim, ter_trim, notafinal, 'Matemática' FROM mat_1a WHERE nome_id=$ls__id AND year=$sa UNION ALL SELECT prim_trim, seg_trim, ter_trim, notafinal, 'Inglês' FROM ing_1a WHERE nome_id=$ls__id AND year=$sa UNION ALL SELECT prim_trim, seg_trim, ter_trim, notafinal, 'Artes Visuais' FROM artesvisuais_1a WHERE nome_id=$ls__id AND year=$sa UNION ALL SELECT prim_trim, seg_trim, ter_trim, notafinal, 'Música' FROM musica_1a WHERE nome_id=$ls__id AND year=$sa UNION ALL SELECT prim_trim, seg_trim, ter_trim, notafinal, 'Educação Física' FROM edf_1a WHERE nome_id=$ls__id AND year=$sa UNION ALL SELECT prim_trim, seg_trim, ter_trim, notafinal, 'Dança' FROM danca_1a WHERE nome_id=$ls__id AND year=$sa";
 
   $ses_sql_a = mysqli_query($conn, $query_1a);
   ?>
   <table class="ui unstackable selectable celled structured table">
     <thead>
       <tr>
-        <th class="center aligned eight wide  " rowspan="2">Disciplina</th>
+        <th class="center aligned eight wide" rowspan="2">Disciplina</th>
         <th class="center aligned three wide" colspan="3">Trimestral</th>
-        <th class="center aligned one wide  " rowspan="2">Anual</th>
+        <th class="center aligned one wide" rowspan="2">Anual</th>
       </tr>
 
       <tr>
